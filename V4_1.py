@@ -31,6 +31,11 @@ start_time = time.time()
 client = discord.Client()
 game = discord.Game("준홍아 도움")    
 
+#여러 변수 선언
+#vasic
+token = "NTAzNTAyMTU3OTI1MDU2NTE0.Xv9c8A.2mSViA-bI_vI2ZUbPvoze5qTt_w"
+#testbot
+#token = "NTI3OTMxNjEwMzE0NzAyODQ4.Dwa6aQ._XuCF9w8Uf8fR68iAKH30-36XwA"
 
 #패기물
 
@@ -82,6 +87,12 @@ async def on_message(message):
 
             elif message.content.startswith( "<@503502157925056514>"):
                 await channel.send("안녕하세요! 준홍봇입니다.")
+
+            elif message.content == "준홍아 comjun04":
+                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 채팅기능", value="comjun04 흠" , inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
 
             elif message.content.startswith("준홍아 긴급"):
                 if message.author.id in owner:
@@ -154,7 +165,7 @@ async def on_message(message):
                     embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
                     embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집', inline=True)
                     embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : 준홍아 찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: 준홍아 건의 건의내용 ,심심해,준홍아,ㅎㅇ,Error", inline=True)
-                    embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검", inline=True)
+                    embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검, ", inline=True)
                     embed.add_field(name="기본명령어4", value="뭐해, star, Ms 계산 Ms계산 형식: 준홍아 Ms 계산 초 또는 m 초 또는 ms, 뒤져, 승현,mswgen,베인블,캡챠,LOL,현재시각,업타임,봇켜짐?,계산 계산형식:준홍아계산 계산식,애교해봐, 날씨 날씨형식: 준홍아 날씨 지역명", inline=True)
                     embed.add_field(name="관리자 명령어", value="청소 청소 형식 : 준홍아 청소 메세지 수 ,cmd cmd형식 : 준홍아 cmd 명령어(cmd),공지 공지형식 : 준홍아 공지 제목 and 내용,stop,reboot")
                     embed.add_field(name="관리자 명령어2", value="eval,pyeval,jseval,c++eval eval들 형식 : 준홍아 eval(py,js,c++) 명령어", inline=True)
@@ -1192,5 +1203,5 @@ async def on_message(message):
         await channel.send(embed=embed)
         await client.get_channel(int(errorchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}')
 
-access_token= os.environ["BOT_TOKEN"]                                           
-client.run(access_token)
+                                           
+client.run(token)
