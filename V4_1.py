@@ -335,45 +335,18 @@ async def on_message(message):
                 FineDust = CheckDust[0][:-2] + " " + CheckDust[0][-2:] 
                 UltraFineDust = CheckDust[1][:-2] + " " + CheckDust[1][-2:] 
                 Ozon = CheckDust[2][:-2] + " " + CheckDust[2][-2:]
-                tomorrowArea = soup.find('div', {'class': 'tomorrow_area'}) 
-                tomorrowCheck = tomorrowArea.find_all('div', {'class': 'main_info morning_box'})
-                tomorrowMoring1 = tomorrowCheck[0].find('span', {'class': 'todaytemp'}).text 
-                tomorrowMoring2 = tomorrowCheck[0].find('span', {'class' : 'tempmark'}).text[2:] 
-                tomorrowMoring = tomorrowMoring1 + tomorrowMoring2
-                tomorrowMState1 = tomorrowCheck[0].find('div', {'class' : 'info_data'}) 
-                tomorrowMState2 = tomorrowMState1.find('ul', {'class' : 'info_list'}) 
-                tomorrowMState3 = tomorrowMState2.find('p', {'class' : 'cast_txt'}).text 
-                tomorrowMState4 = tomorrowMState2.find('div', {'class' : 'detail_box'}) 
-                tomorrowMState5 = tomorrowMState4.find('span').text.strip() 
-                tomorrowMState = tomorrowMState3 + " " + tomorrowMState5
-                tomorrowAfter1 = tomorrowCheck[1].find('p', {'class' : 'info_temperature'}) 
-                tomorrowAfter2 = tomorrowAfter1.find('span', {'class' : 'todaytemp'}).text 
-                tomorrowAfter3 = tomorrowAfter1.find('span', {'class' : 'tempmark'}).text[2:]
-                tomorrowAfter = tomorrowAfter2 + tomorrowAfter3
-                tomorrowAState1 = tomorrowCheck[1].find('div', {'class' : 'info_data'}) 
-                tomorrowAState2 = tomorrowAState1.find('ul', {'class' : 'info_list'}) 
-                tomorrowAState3 = tomorrowAState2.find('p', {'class' : 'cast_txt'}).text 
-                tomorrowAState4 = tomorrowAState2.find('div', {'class' : 'detail_box'}) 
-                tomorrowAState5 = tomorrowAState4.find('span').text.strip() 
-                tomorrowAState = tomorrowAState3 + " " + tomorrowAState5
-
+            
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at,  title=f'{location} 날씨')
-                embed.add_field(name="=========================", value="=", inline=True)
+                embed.add_field(name="=========================", value="사용해 주셔서 감사합니다!", inline=True)
                 embed.add_field(name="정보", value=f'{location} 날씨 정보입니다.', inline=False)
-                embed.add_field(name="현재온도", value=f'{NowTemp}', inline=False)
-                embed.add_field(name="체감온도", value=f'{TodayFeelTemp}', inline=False)
-                embed.add_field(name="오전/오후 온도", value=f'{TodayMorningTemp} / {TodayAfternoonTemp}', inline=False)
-                embed.add_field(name="체감온도", value=f'{WeatherCast}', inline=False)
-                embed.add_field(name="현재 자외선 지수", value=f'{TodayUV}', inline=False)
-                embed.add_field(name="현재 미세먼지 농도", value=f'{FineDust}', inline=False)
-                embed.add_field(name="현재 초미세먼지 농도", value=f'{UltraFineDust}', inline=False)
-                embed.add_field(name="현재 오존 지수", value=f'{Ozon}', inline=False)
-                embed.add_field(name="========================", value="=", inline=False)
-                embed.add_field(name="내일 정보", value=f'{location} 내일 날씨 정보입니다.', inline=False)
-                embed.add_field(name="내일 오전 온도", value=f'{tomorrowMoring}', inline=False)
-                embed.add_field(name="내일 오전 상태", value=f'{tomorrowMState}', inline=False)
-                embed.add_field(name="내일 오후 온도", value=f'{tomorrowAfter}', inline=False)
-                embed.add_field(name="내일 오후 상태", value=f'{tomorrowAState}', inline=False)
+                embed.add_field(name="현재온도", value=f'{NowTemp}', inline=True)
+                embed.add_field(name="체감온도", value=f'{TodayFeelTemp}', inline=True)
+                embed.add_field(name="오전/오후 온도", value=f'{TodayMorningTemp} / {TodayAfternoonTemp}', inline=True)
+                embed.add_field(name="현재날씨정보", value=f'{WeatherCast}', inline=True)
+                embed.add_field(name="현재 자외선 지수", value=f'{TodayUV}', inline=True)
+                embed.add_field(name="현재 미세먼지 농도", value=f'{FineDust}', inline=True)
+                embed.add_field(name="현재 초미세먼지 농도", value=f'{UltraFineDust}', inline=True)
+                embed.add_field(name="현재 오존 지수", value=f'{Ozon}', inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
@@ -384,7 +357,6 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨, 도움 : OWO#1996", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
                 
-
 
             elif message.content == '준홍아 섭정보':
                 rnrrk = message.guild.region
@@ -566,7 +538,7 @@ async def on_message(message):
             elif message.content.startswith("준홍아 cmd"):
                 if message.author.id in owner:
                     try:
-                        a = " ".join(message.content.split()[2:])
+                        a = " ".join(message.content.split()[1:])
                     except:
                         await message.channel.send("내용을 입력해주세요!")
                         return
@@ -1227,4 +1199,3 @@ async def on_message(message):
 
                                            
 client.run(token)
-
