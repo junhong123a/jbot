@@ -372,12 +372,12 @@ async def on_message(message):
                 embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=True)
                 embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=True)
                 embed.add_field(name="서버 채널 수", value=f'전체 채널: {len(message.guild.channels)}개 (채팅채널 : {len(message.guild.text_channels)}개 | 음성채널 : {len(message.guild.voice_channels)}개 | 카테고리 : {len(message.guild.categories)}개)', inline=True)
-                embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=False)
+                embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=True)
                 embed.add_field(name="서버 멤버 수", value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)', inline=True)
-                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)
+                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=True)
                 embed.add_field(name="서버 부스트 레벨", value=f'<:boost:689765177532612648> {message.guild.premium_tier}레벨', inline=True)
                 embed.add_field(name="서버 부스트 횟수", value=f'<:boost:689765177532612648> {message.guild.premium_subscription_count}번', inline=True)
-                embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=False)
+                embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=True)
                 if message.guild.afk_channel != None:
                     embed.add_field(name = f'잠수 채널', value = f'<a:yes:690124935179272211> 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = True)
                 else:
