@@ -33,9 +33,9 @@ game = discord.Game("준홍아 도움")
 
 #여러 변수 선언
 #vasic
-token = "NTAzNTAyMTU3OTI1MDU2NTE0.Xv9c8A.2mSViA-bI_vI2ZUbPvoze5qTt_w"
+#token = "NTAzNTAyMTU3OTI1MDU2NTE0.Xv9c8A.2mSViA-bI_vI2ZUbPvoze5qTt_w"
 #testbot
-#token = "NTI3OTMxNjEwMzE0NzAyODQ4.Dwa6aQ._XuCF9w8Uf8fR68iAKH30-36XwA"
+token = "NjY4Nzg1MDYyMzAwNDgzNTk1.XiWUoA.z2KeUmsog2KIPKWRfrOSnhUoI58"
 
 #패기물
 
@@ -1156,9 +1156,10 @@ async def on_message(message):
                     try:
                         value = eval(mathtext)
                         embed=discord.Embed(
-                            title=f'{mathtext}식의 결과',
+                            title=f'{mathtext} 식의 결과',
                             description=f'{str(value)}',
                             colour=0x85CFFF
+                            timestamp=message.created_at
                         )
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
