@@ -31,12 +31,6 @@ start_time = time.time()
 client = discord.Client()
 game = discord.Game("준홍아 도움")    
 
-#여러 변수 선언
-#vasic
-#token = "NTAzNTAyMTU3OTI1MDU2NTE0.Xv9c8A.2mSViA-bI_vI2ZUbPvoze5qTt_w"
-#testbot
-token = "NjY4Nzg1MDYyMzAwNDgzNTk1.XiWUoA.z2KeUmsog2KIPKWRfrOSnhUoI58"
-
 #패기물
 
 
@@ -1203,5 +1197,5 @@ async def on_message(message):
         await channel.send(embed=embed)
         await client.get_channel(int(errorchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}')
 
-                                           
-client.run(token)
+access_token = os.environ["BOT_TOKEN"]                         
+client.run(access_token)
