@@ -1156,7 +1156,7 @@ async def on_message(message):
                     try:
                         value = eval(mathtext)
                         embed=discord.Embed(
-                            title=f'{mathtext} 식의 결과',
+                            title=f'{mathtext}식의 결과',
                             description=f'{str(value)}',
                             colour=0x85CFFF
                         )
