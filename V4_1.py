@@ -104,35 +104,35 @@ async def on_message(message):
                 #정상, 불안정, 조금 불안정!, 매우 불안정! 심각
                 #0,999 1000,2000 2001,3000 3001,6000 6001 100000
                 vld = client.latency * 1000
-                if vld >= 0 and vld <= 29:
+                if vld >= 0 and vld <= 199:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 정상 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 30 and vld <= 59:
+                elif vld >= 200 and vld <= 230:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 약간 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 60 and vld <= 99:
+                elif vld >= 231 and vld <= 250:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 조금 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
                 
-                elif vld >= 100 and vld <= 199:
+                elif vld >= 251 and vld <= 333:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 매우 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 200 and vld <= 100000:
+                elif vld >= 334 and vld <= 100000:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 심각하게 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -147,7 +147,7 @@ async def on_message(message):
             
             elif message.content == "준홍아 test":
                 a = ['123456']
-                b = 56
+                b = 0
                 await message.channel.send()
 
             elif message.content == '준홍아 도움':
@@ -1166,13 +1166,18 @@ async def on_message(message):
                         await channel.send("계산식이 올바르지 않습니다..")
 
             elif message.content == '준홍아 애교해봐':
-                p = random.randint(1,2)
+                p = random.randint(1,3)
                 if p == 1:
+                    embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                    embed.add_field(name="준홍봇 채팅기능", value="하고싶지 않습니다",inline=True)
+                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                    await channel.send(embed=embed)
+                if p == 2:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="1더하기 1은 기요미",inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
-                if p == 2:
+                if p == 3:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="낙으로 보냈습니다.",inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
