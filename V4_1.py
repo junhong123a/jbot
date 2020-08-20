@@ -360,7 +360,7 @@ async def on_message(message):
                 await channel.send(embed=embed)
                 
 
-            elif message.content == '준홍아 섭정보':
+            elif message.content == '준홍아 섭정보' or message.content == "준홍아 서버정보":
                 rnrrk = message.guild.region
                 print(message.guild.region)
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"서버 정보 - {message.guild.name}")
