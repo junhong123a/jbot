@@ -147,6 +147,7 @@ async def on_message(message):
             
             elif message.content == "준홍아 test":
                 a = ['123456']
+                b = 0
                 await message.channel.send()
 
             elif message.content == '준홍아 도움':
