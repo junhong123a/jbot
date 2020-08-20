@@ -31,6 +31,7 @@ start_time = time.time()
 client = discord.Client()
 game = discord.Game("준홍아 도움")    
 
+
 #패기물
 
 
@@ -1150,14 +1151,14 @@ async def on_message(message):
                     try:
                         value = eval(mathtext)
                         embed=discord.Embed(
-                            title=f'{mathtext}식의 결과',
+                            title=f'{mathtext} 식의 결과',
                             description=f'{str(value)}',
                             colour=0x85CFFF
                         )
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
                     except:
-                         await channel.send("계산식이 올바르지 않습니다..")
+                        await channel.send("계산식이 올바르지 않습니다..")
 
             elif message.content == '준홍아 애교해봐':
                 p = random.randint(1,3)
@@ -1197,5 +1198,5 @@ async def on_message(message):
         await channel.send(embed=embed)
         await client.get_channel(int(errorchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}')
 
-access_token = os.environ["BOT_TOKEN"]                         
+access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
