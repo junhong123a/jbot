@@ -1159,7 +1159,6 @@ async def on_message(message):
                             title=f'{mathtext} 식의 결과',
                             description=f'{str(value)}',
                             colour=0x85CFFF
-                            timestamp=message.created_at
                         )
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
