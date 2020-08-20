@@ -104,37 +104,37 @@ async def on_message(message):
                 #정상, 불안정, 조금 불안정!, 매우 불안정! 심각
                 #0,999 1000,2000 2001,3000 3001,6000 6001 100000
                 vld = client.latency * 1000
-                if vld >= 0 and vld <= 999:
+                if vld >= 0 and vld <= 29:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 정상 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 1000 and vld <= 2000:
+                elif vld >= 30 and vld <= 59:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 불안정 입니다!', inline=True)
+                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 약간 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 2001 and vld <= 3000:
+                elif vld >= 60 and vld <= 99:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 조금 불안정! 입니다!', inline=True)
+                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 조금 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
                 
-                elif vld >= 3001 and vld <= 6000:
+                elif vld >= 100 and vld <= 199:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 매우 불안정! 입니다!', inline=True)
+                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 매우 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 6001 and vld <= 100000:
+                elif vld >= 200 and vld <= 100000:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 심각 입니다!', inline=True)
+                    embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 심각하게 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
@@ -372,12 +372,12 @@ async def on_message(message):
                 embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=True)
                 embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=True)
                 embed.add_field(name="서버 채널 수", value=f'전체 채널: {len(message.guild.channels)}개 (채팅채널 : {len(message.guild.text_channels)}개 | 음성채널 : {len(message.guild.voice_channels)}개 | 카테고리 : {len(message.guild.categories)}개)', inline=True)
-                embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=True)
+                embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=False)
                 embed.add_field(name="서버 멤버 수", value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)', inline=True)
-                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=True)
+                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)
                 embed.add_field(name="서버 부스트 레벨", value=f'<:boost:689765177532612648> {message.guild.premium_tier}레벨', inline=True)
                 embed.add_field(name="서버 부스트 횟수", value=f'<:boost:689765177532612648> {message.guild.premium_subscription_count}번', inline=True)
-                embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=True)
+                embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=False)
                 if message.guild.afk_channel != None:
                     embed.add_field(name = f'잠수 채널', value = f'<a:yes:690124935179272211> 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = True)
                 else:
