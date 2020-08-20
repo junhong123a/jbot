@@ -1166,18 +1166,13 @@ async def on_message(message):
                         await channel.send("계산식이 올바르지 않습니다..")
 
             elif message.content == '준홍아 애교해봐':
-                p = random.randint(1,3)
+                p = random.randint(1,2)
                 if p == 1:
-                    embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="하고싶지 않습니다",inline=True)
-                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                    await channel.send(embed=embed)
-                if p == 2:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="1더하기 1은 기요미",inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
-                if p == 3:
+                if p == 2:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="낙으로 보냈습니다.",inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
