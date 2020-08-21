@@ -70,7 +70,10 @@ async def on_message(message):
                 #return None
 
         if message.content.startswith('준홍아'):
-            await client.get_channel(int(logchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}')
+            embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+            embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
+            embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+            await client.get_channel(int(logchannel)).send(embed=embed)
 
             if message.content == "준홍아 안녕":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -1205,3 +1208,4 @@ async def on_message(message):
 
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
+
