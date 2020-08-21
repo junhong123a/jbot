@@ -399,7 +399,7 @@ async def on_message(message):
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 건의", value=f'<@447934468603379724> {message.author}({message.author.id})님의 건의 : {msg}', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                    await client.get_channel(int(gunlog)).send()
+                    await client.get_channel(int(gunlog)).send(embed=embed)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 건의 할말", inline=True)
