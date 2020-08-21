@@ -396,7 +396,10 @@ async def on_message(message):
                 try:
                     msg = message.content[7:]
                     await channel.send("건의가 완료되었습니다!")
-                    await client.get_channel(int(gunlog)).send(f'{message.author}({message.author.id})님의 건의 : {msg}')
+                    embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                    embed.add_field(name="준홍봇 건의", value=f'<@447934468603379724> {message.author}({message.author.id})님의 건의 : {msg}', inline=True)
+                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                    await client.get_channel(int(gunlog)).send()
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 건의 할말", inline=True)
@@ -1208,4 +1211,3 @@ async def on_message(message):
 
 access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
-
