@@ -551,7 +551,7 @@ async def on_message(message):
             elif message.content.startswith("준홍아 cmd"):
                 if message.author.id in owner:
                     try:
-                        a = " ".join(message.content.split()[1:])
+                        a = message.content[8:]
                     except:
                         await message.channel.send("내용을 입력해주세요!")
                         return
