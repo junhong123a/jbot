@@ -45,7 +45,7 @@ async def on_ready():
     print('Bot Online')
     print(client.user.name)
     print(id)
-    await client.get_channel(readylog).send("준홍봇 전원 on")
+    await client.get_channel(readylog).send("준홍봇 전원 on, starting time : %04d년%02d월%02d일 %02d시%02d분%02d초" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
     dagi = 8
     messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '준홍!good good & 잊니 유튜브 채널 디스코드 를 가입하세요!', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
     while True:
