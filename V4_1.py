@@ -1122,12 +1122,12 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '준홍아 현재시각':
-                now = time.localtime()
-                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                embed.add_field(name="준홍봇 채팅기능", value="%02d시%02d분%02d초" % f'{(now.hour)+9}', f'{(now.now.min)+9}', f'{(now.tm_sec)+9})'
-                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                await channel.send(embed=embed)
+            #elif message.content == '준홍아 현재시각':
+                #now = time.localtime()
+                #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                #embed.add_field(name="준홍봇 채팅기능", value="%02d시%02d분%02d초" % f'{(now.hour)+9}', f'{(now.now.min)+9}', f'{(now.tm_sec)+9})'
+                #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                #await channel.send(embed=embed)
 
             elif message.content == '준홍아 업타임':
                 current_time = time.time()
