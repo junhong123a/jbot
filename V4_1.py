@@ -262,7 +262,7 @@ async def on_message(message):
                         song.append(s.find('span', {"class": "checkEllipsis"}).text)
                     for i in range(RANK):
                         embed.add_field(name='%3d위'%(i+1), value='%s - %s'%(title[i], song[i]), inline=False)
-                    embed.set_footer(icon_url=message.author.avatar_url, text=f'{message.author}')
+                    embed.set_footer(text=f'{message.author}, 인증됨', icon_url=message.author_avatar_url)
                     await channel.send(f'<@{message.author.id}>', embed=embed)
 
             elif message.content.startswith('준홍아 익명'):
