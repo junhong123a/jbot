@@ -45,8 +45,8 @@ async def on_ready():
     print('Bot Online')
     print(client.user.name)
     print(id)
-    now = time.localtime()
-    await client.get_channel(readylog).send("준홍봇 전원 on, %04d년%02d월%02d일 %02d시%02d분%02d초 online time." % ({str(now.tm_year)+9}, {str(now.tm_mon)+9}, {str(now.tm_mday)+9}, {str(now.tm_hour)+9}, {str(now.tm_min)+9}, {str(now.tm_sec)+9}))
+    now = datetime.datetime.now()
+    await client.get_channel(readylog).send("준홍봇 전원 on,%02d시%02d분%02d초 online time." % f'{(now.hour)+9}', f'{(now.now.min)+9}', f'{(now.tm_sec)+9})'
     dagi = 8
     messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '준홍!good good & 잊니 유튜브 채널 디스코드 를 가입하세요!', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
     while True:
@@ -1126,7 +1126,7 @@ async def on_message(message):
             elif message.content == '준홍아 현재시각':
                 now = time.localtime()
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                embed.add_field(name="준홍봇 채팅기능", value="%04d년%02d월%02d일 %02d시%02d분%02d초" % ({str(now.tm_year)+9}, {str(now.tm_mon)+9}, {str(now.tm_mday)+9}, {str(now.tm_hour)+9}, {str(now.tm_min)+9}, {str(now.tm_sec)+9}))
+                embed.add_field(name="준홍봇 채팅기능", value="%02d시%02d분%02d초" % f'{(now.hour)+9}', f'{(now.now.min)+9}', f'{(now.tm_sec)+9})'
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
