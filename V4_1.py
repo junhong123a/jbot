@@ -11,6 +11,7 @@ import configparser
 from json import loads
 from captcha.image import ImageCaptcha
 import hgtk
+import psycopg2
 
 # 초성 리스트. 00 ~ 18
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -19,7 +20,9 @@ JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 
 # 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
-
+conn = psycopg2.connect(host='localhost', dbname='test', user='postgres', password='pwtest', port='5432') # db에 접속
+cur = conn.cursor()
+cur.execute("CREATE TABLE test_table (title varchar, content text);") 
 
 logchannel = 727388709485543485
 errorchannel = 727388190549475400
@@ -177,8 +180,18 @@ async def on_message(message):
                 await channel.send(embed=embed)
 
             elif message.content == "준홍아 test":
-                a = ['123456']
-                await message.channel.send()
+                cur.execute("INSERT INTO numbers VALUES (%s)", (42,))
+
+            elif message.content == "준홍아 test2":
+                cur.execute("SELECT * FROM test;")
+                await channel.send(cur.fetchone())
+
+                #  데이터를 변경했다면 반드시 .commit() 해주어야 한다
+                conn.commit()
+
+                # 커서를 닫고 연걸을 종료한다.
+                cur.close()
+                conn.close()
 
             elif message.content == '준홍아 도움':
                 try: 
