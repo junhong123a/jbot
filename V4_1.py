@@ -66,9 +66,7 @@ def korean_to_be_englished(korean_word):
 async def on_ready():
     print('Bot Online')
     print(client.user.name)
-    print(id)
-    now = datetime.datetime.now()
-    
+    print(id)  
     await client.get_channel(readylog).send("준홍봇 전원 on")
     dagi = 8
     messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '준홍!good good & 잊니 유튜브 채널 디스코드 를 가입하세요!', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
@@ -180,7 +178,6 @@ async def on_message(message):
 
             elif message.content == "준홍아 test":
                 a = ['123456']
-                b = 0
                 await message.channel.send()
 
             elif message.content == '준홍아 도움':
@@ -474,21 +471,21 @@ async def on_message(message):
                 await channel.send(embed=embed)
 
             elif message.content  ==  '준홍아 타자':
-                curtime = time.time()
                 fltmxm = random.randint(0,2)
                 xkwk=["테스트", "test", "안녕하세요"]
                 cncnf=xkwk[fltmxm]
-                m = str(cncnf) + ".png"
-                await message.channel.send(f'{m}')
-                checktime = time.time()
+                curtime = time.time()
+                await message.channel.send(f'{cncnf}')
+                #checktime = time.time()
                 def check(m):
                     return m.content == f'{cncnf}' and m.channel == channel
                 
 
-                te = int(round(checktime - curtime))            
+                te = time.strftime('%S', curtime)  
+                al = len(hgtk.text.decompose(cncnf)) / te * 60         
                 msg = await client.wait_for('message', check=check)
                 await channel.send(f'{te}')
-                await channel.send('성공! {.author}!'.format(msg))
+                await channel.send(f'@<{message.author.id}>, {te}초, {al}타'.format(msg))
 
             elif message.content == '준홍아 빼에에엑':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -569,7 +566,6 @@ async def on_message(message):
                 if message.author.guild_permissions.administrator:
                     varrr=message.content.split(' ')
                     await message.channel.purge(limit=int(varrr[2])+1)
-                    now=datetime.datetime.now()
                     msg=await message.channel.send(embed=discord.Embed(title=f'메시지 {str(int(varrr[2]))}개 삭제 완료!', descirption='응용 기능',timestamp=message.created_at, colour=discord.Colour.blue()).set_footer(icon_url=message.author.avatar_url, text=f'{str(message.author)}, 인증됨'))
                     await asyncio.sleep(3)
                     await msg.delete()
