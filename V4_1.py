@@ -46,7 +46,7 @@ async def on_ready():
     print(client.user.name)
     print(id)
     now = datetime.datetime.now()
-    dagi = 8 
+    
     await client.get_channel(readylog).send("준홍봇 전원 on")
     messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '준홍!good good & 잊니 유튜브 채널 디스코드 를 가입하세요!', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
     while True:
@@ -148,7 +148,13 @@ async def on_message(message):
                 embed.add_field(name="준홍봇 채팅기능", value="수현은 저랑 같이 봇 개발하는 개발자 입니다", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
-            
+
+            elif message.content  ==  '준홍아 호스팅':
+                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 채팅기능", value="준홍봇은 헤로쿠(heroku) 호스팅으로 구동되고 있습니다.", inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
+
             elif message.content == "준홍아 test":
                 a = ['123456']
                 b = 0
@@ -165,7 +171,7 @@ async def on_message(message):
                     embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
                     embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집, comjun04', inline=True)
                     embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : 준홍아 찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: 준홍아 건의 건의내용 ,심심해,준홍아,ㅎㅇ,Error", inline=True)
-                    embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검", inline=True)
+                    embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검, 호스팅", inline=True)
                     embed.add_field(name="기본명령어4", value="뭐해, star, Ms 계산 Ms계산 형식: 준홍아 Ms 계산 초 또는 m 초 또는 ms, 뒤져, 승현,mswgen,베인블,캡챠,LOL,현재시각,업타임,봇켜짐?,계산 계산형식:준홍아계산 계산식,애교해봐, 날씨 날씨형식: 준홍아 날씨 지역명", inline=True)
                     embed.add_field(name="관리자 명령어", value="청소 청소 형식 : 준홍아 청소 메세지 수 ,cmd cmd형식 : 준홍아 cmd 명령어(cmd),공지 공지형식 : 준홍아 공지 제목 and 내용,stop,reboot")
                     embed.add_field(name="관리자 명령어2", value="eval,pyeval,jseval,c++eval eval들 형식 : 준홍아 eval(py,js,c++) 명령어", inline=True)
