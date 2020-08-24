@@ -474,7 +474,7 @@ async def on_message(message):
                 fltmxm = random.randint(0,2)
                 xkwk=["테스트", "test", "안녕하세요"]
                 cncnf=xkwk[fltmxm]
-                curtime = time.time()
+                curtime = tuple[time.time()]
                 await message.channel.send(f'{cncnf}')
                 #checktime = time.time()
                 def check(m):
