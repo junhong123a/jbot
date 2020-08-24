@@ -108,7 +108,7 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == f'<@{clinet.user.id}>':
+            elif message.content == f'<@{client.user.id}>':
                 await channel.send("안녕하세요! 준홍봇입니다.")
 
             elif message.content == "준홍아 comjun04":
