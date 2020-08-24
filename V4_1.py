@@ -20,7 +20,7 @@ JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 
 # 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
-conn = psycopg2.connect(host='localhost', dbname='test', user='postgres', password='pwtest', port='5432') # db에 접속
+conn = psycopg2.connect(host='ec2-54-197-254-117.compute-1.amazonaws.com', DATABASE_URL='postgres://jtvmlvvejdmcfl:0f89695e903ff0a4a863f5aa972615679ba98d39c356404298bddd4d8a722030@ec2-54-197-254-117.compute-1.amazonaws.com:5432/d360stjjckv90q', dbname='d360stjjckv90q', user='postgres', password='0f89695e903ff0a4a863f5aa972615679ba98d39c356404298bddd4d8a722030', port='5432') # db에 접속
 cur = conn.cursor()
 cur.execute("CREATE TABLE test_table (title varchar, content text);") 
 
@@ -1209,7 +1209,7 @@ async def on_message(message):
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
                     except:
-                        await channel.send("계산식이 올바르지 않습니다...")
+                        await channel.send("계산식이 올바르지 않습니다..")
 
             elif message.content == '준홍아 애교해봐':
                 p = random.randint(1,3)
