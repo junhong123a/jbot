@@ -9,7 +9,7 @@ from watchdog.events import PatternMatchingEventHandler
 from shutil import copyfile
 import configparser
 from json import loads
-from captcha.image import ImageCaptcha'
+from captcha.image import ImageCaptcha
 import hgtk
 
 # 초성 리스트. 00 ~ 18
@@ -31,6 +31,7 @@ gunlog = 727388605516873790
 Emergency = 734484279383293972
 id = 503502157925056514
 ban = []
+
 
 start_time = time.time()
 
