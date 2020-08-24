@@ -32,8 +32,6 @@ Emergency = 734484279383293972
 id = 503502157925056514
 ban = []
 
-# connection = pymongo.MongoClient(mongo_server, 27017)
-
 start_time = time.time()
 
 client = discord.Client()
