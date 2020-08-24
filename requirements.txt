@@ -17,3 +17,4 @@ setuptools==47.1.0
 soupsieve==2.0.1
 urllib3==1.25.10
 watchdog==0.10.3
+hgtk==0.1.3
