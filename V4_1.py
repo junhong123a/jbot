@@ -9,7 +9,8 @@ from watchdog.events import PatternMatchingEventHandler
 from shutil import copyfile
 import configparser
 from json import loads
-from captcha.image import ImageCaptcha
+from captcha.image import ImageCaptcha'
+import hgtk
 
 # 초성 리스트. 00 ~ 18
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
