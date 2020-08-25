@@ -196,7 +196,7 @@ async def on_message(message):
             elif message.content == '준홍아 도움':
                 try: 
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="보내는중..", value="잠시 기다려 주세요", inline=True)
+                    embed.add_field(name="보내는중..", value="<a:yes:690124935179272211>잠시 기다려 주세요", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     time.sleep(3)
