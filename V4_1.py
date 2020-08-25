@@ -497,7 +497,7 @@ async def on_message(message):
                 end = time.time()
                 et = end - checktime                        # 실제로 걸린 시간을 계산
                 et = format(et, ".2f")
-                al = hgtk.text.decompose(f'{cncnf}') / end * 60     
+                al = len(hgtk.text.decompose(f'{cncnf}')) / end * 60     
                 await channel.send(f'@<{message.author.id}>, {et}초, {al}타'.format(msg))
 
             elif message.content == '준홍아 빼에에엑':
@@ -1209,7 +1209,7 @@ async def on_message(message):
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
                     except:
-                        await channel.send("계산식이 올바르지 않습니다...")
+                        await channel.send("계산식이 올바르지 않습니다..")
 
             elif message.content == '준홍아 애교해봐':
                 p = random.randint(1,3)
