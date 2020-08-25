@@ -1209,7 +1209,7 @@ async def on_message(message):
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                         await channel.send(embed=embed)
                     except:
-                        await channel.send("계산식이 올바르지 않습니다..")
+                        await channel.send("계산식이 올바르지 않습니다...")
 
             elif message.content == '준홍아 애교해봐':
                 p = random.randint(1,3)
