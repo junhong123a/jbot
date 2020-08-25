@@ -485,7 +485,7 @@ async def on_message(message):
 
             elif message.content  ==  '준홍아 타자':
                 fltmxm = random.randint(0,2)
-                xkwk=["테스트", "test", "안녕하세요"]
+                xkwk=["몰라ㅇ", "test", "안녕하세요"]
                 cncnf=xkwk[fltmxm]
                 await message.channel.send(f'{cncnf}')
                 checktime = time.time()
@@ -497,7 +497,7 @@ async def on_message(message):
                 end = time.time()
                 et = end - checktime                        # 실제로 걸린 시간을 계산
                 et = format(et, ".2f")
-                al = len(hgtk.text.decompose(f'{cncnf}')) / et * 60
+                al = {len(hgtk.text.decompose(f'{cncnf}')) / et * 60}
                 await channel.send(f'<@{message.author.id}>, {et}초, {al}타'.format(msg))
 
             elif message.content == '준홍아 빼에에엑':
