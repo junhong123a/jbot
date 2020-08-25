@@ -39,7 +39,7 @@ ban = []
 start_time = time.time()
 
 client = discord.Client()
-game = discord.Game("///도움")    
+game = discord.Game("준홍아 도움")    
 
 
 #패기물
@@ -72,7 +72,7 @@ async def on_ready():
     print(id)  
     await client.get_channel(readylog).send("준홍봇 전원 on")
     dagi = 8
-    messages = ['///도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '안녕하세요', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
+    messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '안녕하세요', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
     while True:
        await client.change_presence(status=discord.Status.online, activity=discord.Game(name=messages[0]))
        messages.append(messages.pop(0))
@@ -94,13 +94,13 @@ async def on_message(message):
             #if banword in message.content:
                 #return None
 
-        if message.content.startswith('///'):
+        if message.content.startswith('준홍아'):
             embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
             embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
             embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
             await client.get_channel(int(logchannel)).send(embed=embed)
 
-            if message.content == "///안녕":
+            if message.content == "준홍아 안녕":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 await message.channel.send(f"<@{message.author.id}> 님 환영합니다!")
                 embed.add_field(name="준홍봇 채팅기능", value="안녕하세요 준홍봇입니다. 준홍봇의 개발자는 준홍!good good#8922입니다.! 자세한 명령어는 `준홍아 도움 `을! \n그리고 왠만하면 봇DM에서 명령어는 사용안해주셨으면 합니다." , inline=True)
@@ -111,15 +111,15 @@ async def on_message(message):
             elif message.content == f'<@{client.user.id}>':
                 await channel.send("안녕하세요! 준홍봇입니다.")
 
-            elif message.content == "///comjun04":
+            elif message.content == "준홍아 comjun04":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="comjun04 흠" , inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith("///긴급"):
+            elif message.content.startswith("준홍아 긴급"):
                 if message.author.id in owner:
-                    a = message.content[5:]
+                    a = message.content[7:]
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 정지기능", value=f"긴급한 일이 일어나 봇을 중지시킵니다.사유가 팀SB에게 전달되었습니다.\n\n 사유: {a} ", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -128,7 +128,7 @@ async def on_message(message):
                     await client.get_channel(int(Emergency)).send(f"긴급한 일이 일어나 봇을 중지시켰습니다. 사유 : {a}")
 
                     
-            elif message.content  ==  '///핑':
+            elif message.content  ==  '준홍아 핑':
                 #정상, 불안정, 조금 불안정!, 매우 불안정! 심각
                 #0,999 1000,2000 2001,3000 3001,6000 6001 100000
                 vld = client.latency * 1000
@@ -167,13 +167,13 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-            elif message.content  ==  '///수현':
+            elif message.content  ==  '준홍아 수현':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="수현은 저랑 같이 봇 개발하는 개발자 입니다", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content  ==  '///호스팅':
+            elif message.content  ==  '준홍아 호스팅':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="준홍봇은 헤로쿠(heroku) 호스팅으로 구동되고 있습니다.", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -193,7 +193,7 @@ async def on_message(message):
                 #cur.close()
                 #vconn.close()
 
-            elif message.content == '///도움':
+            elif message.content == '준홍아 도움':
                 try: 
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="보내는중..", value="잠시 기다려 주세요", inline=True)
@@ -201,13 +201,13 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     time.sleep(3)
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `///` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
-                    embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : ///say 할말, esay esay형식 : ///esay 할말, 네집, comjun04', inline=True)
-                    embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : ///찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: ///건의 건의내용 ,심심해,///,ㅎㅇ,Error", inline=True)
+                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
+                    embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집, comjun04', inline=True)
+                    embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : 준홍아 찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: 준홍아 건의 건의내용 ,심심해,준홍아,ㅎㅇ,Error", inline=True)
                     embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검, 호스팅", inline=True)
-                    embed.add_field(name="기본명령어4", value="뭐해, star, Ms 계산 Ms계산 형식: ///Ms 계산 초 또는 m 초 또는 ms, 뒤져, 승현,mswgen,베인블,캡챠,LOL,현재시각,업타임,봇켜짐?,계산 계산형식:///계산 계산식,애교해봐, 날씨 날씨형식: ///날씨 지역명", inline=True)
-                    embed.add_field(name="관리자 명령어", value="청소 청소 형식 : /// 청소 메세지 수 ,cmd cmd형식 : /// cmd 명령어(cmd),공지 공지형식 : /// 공지 제목 and 내용,stop,reboot")
-                    embed.add_field(name="관리자 명령어2", value="eval,pyeval,jseval,c++eval eval들 형식 : ///eval(py,js,c++) 명령어", inline=True)
+                    embed.add_field(name="기본명령어4", value="뭐해, star, Ms 계산 Ms계산 형식: 준홍아 Ms 계산 초 또는 m 초 또는 ms, 뒤져, 승현,mswgen,베인블,캡챠,LOL,현재시각,업타임,봇켜짐?,계산 계산형식:준홍아계산 계산식,애교해봐, 날씨 날씨형식: 준홍아 날씨 지역명", inline=True)
+                    embed.add_field(name="관리자 명령어", value="청소 청소 형식 : 준홍아 청소 메세지 수 ,cmd cmd형식 : 준홍아 cmd 명령어(cmd),공지 공지형식 : 준홍아 공지 제목 and 내용,stop,reboot")
+                    embed.add_field(name="관리자 명령어2", value="eval,pyeval,jseval,c++eval eval들 형식 : 준홍아 eval(py,js,c++) 명령어", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await message.author.send(embed=embed)
                 except:
@@ -216,39 +216,39 @@ async def on_message(message):
                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                    await channel.send(embed=embed) 
 
-            elif message.content  ==  '///죽어':
+            elif message.content  ==  '준홍아 죽어':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="그런말은 쓰면 나빠요", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///say'):
+            elif message.content.startswith('준홍아 say'):
                 try:
-                    sms = message.content[6:]
+                    sms = message.content[8:]
                     await channel.send(sms)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: ///say 할말", inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 say 할말", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-            elif message.content.startswith('///esay'):
+            elif message.content.startswith('준홍아 esay'):
                 try:
-                    sms = message.content[7:]
+                    sms = message.content[9:]
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value=(sms), inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: ///esay 할말", inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 esay 할말", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-            elif message.content.startswith('///갠챗'):
+            elif message.content.startswith('준홍아 갠챗'):
                 try:
-                    author = message.guild.get_member(int(message.content[5:23]))
-                    msg = message.content[24:]
+                    author = message.guild.get_member(int(message.content[7:25]))
+                    msg = message.content[26:]
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 전송기능", value=msg, inline=True)
                     embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
@@ -260,17 +260,17 @@ async def on_message(message):
                     await channel.send(embed=embed)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: ///갠챗 유저ID 할말 (문제가 없는데 이메세지가 출력된다면 권한문제일수 있습니다.)", inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 갠챗 유저ID 할말 (문제가 없는데 이메세지가 출력된다면 권한문제일수 있습니다.)", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-            elif message.content  ==  '///네집':
+            elif message.content  ==  '준홍아 네집':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="준홍봇의 집은 준홍!good good&. 잊니 유튜브 채널 서버에요!!", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///찬반투표'):
+            elif message.content.startswith('준홍아 찬반투표'):
                 lern=message.content[9:]
                 embed=discord.Embed(
                     title=str(lern),
@@ -280,7 +280,7 @@ async def on_message(message):
                 await msg.add_reaction('👍')
                 await msg.add_reaction('👎')
 
-            elif message.content=='///멜론차트':
+            elif message.content=='준홍아 멜론차트':
                 if __name__=="__main__":
                     RANK=10
                     header={'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
@@ -304,14 +304,14 @@ async def on_message(message):
                     embed.set_footer(text=f'{message.author}, 인증됨', icon_url=message.author.avatar_url)
                     await channel.send(f'<@{message.author.id}>', embed=embed)
 
-            elif message.content.startswith('///익명'):
+            elif message.content.startswith('준홍아 익명'):
                 try:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 문의기능", value="익명으로 문의가 완료되었습니다!", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     mes = message.content
-                    index = mes[5:]
+                    index = mes[4:]
                     embedadmin = discord.Embed(title = index,description = "보낸사람 <@%s>" %(str(message.author.id)))
                     channelid = 727388627486769193  #글이 작성되는 채널
                     adminch = 727388627486769193 # 보낸사람이 누군지 확인할수있는 채널id
@@ -322,12 +322,12 @@ async def on_message(message):
                     await client.get_channel(adminch).send(embed=embedadmin)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: ///익명 할말", inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 익명 할말", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
 
-            elif message.content.startswith('///내정보'):
+            elif message.content.startswith('준홍아 내정보'):
                 date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
                 status_dict: dict = {discord.Status.online: '<:1_:599936558883143683> 온라인',
                     discord.Status.offline: '<:offline:599936559034269697> 오프라인',
@@ -348,15 +348,15 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///내프사':
+            elif message.content == '준홍아 내프사':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 유저정보", value="유저의 프로필 사진입니다!", inline=True)
                 embed.set_image(url=message.author.avatar_url)
                 embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith("///날씨"):
-                location = message.content[5:]
+            elif message.content.startswith("준홍아 날씨"):
+                location = message.content[7:]
                 NowTemp = ""
                 Finallocation = location + '날씨'
                 CheckDust = []
@@ -395,7 +395,7 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == "///실검":
+            elif message.content == "준홍아 실검":
                 embed=discord.Embed(title=f"네이버 실시간 검색 정보", colour=0x85CFFF, timestamp=datetime.datetime.utcnow())
                 for r in requests.get('https://www.naver.com/srchrank?frm=main').json().get("data")[:10]:
                     embed.add_field(name=f"**{r.get('rank')}위**", value=f"[{r.get('keyword')}](https://search.naver.com/search.naver?where=nexearch&query={r.get('keyword').replace(' ', '+')})", inline=False)
@@ -403,7 +403,7 @@ async def on_message(message):
                 await channel.send(embed=embed)
                 
 
-            elif message.content == '///섭정보' or message.content == "///서버정보":
+            elif message.content == '준홍아 섭정보' or message.content == "준홍아 서버정보":
                 rnrrk = message.guild.region
                 print(message.guild.region)
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"서버 정보 - {message.guild.name}")
@@ -432,9 +432,9 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///건의'):
+            elif message.content.startswith('준홍아 건의'):
                 try:
-                    msg = message.content[5:]
+                    msg = message.content[7:]
                     await channel.send("건의가 완료되었습니다!")
                     await client.get_channel(int(gunlog)).send(f'<@447934468603379724>')
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -443,17 +443,17 @@ async def on_message(message):
                     await client.get_channel(int(gunlog)).send(embed=embed)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: ///건의 할말", inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 건의 할말", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-            elif message.content  ==  '///심심해':
+            elif message.content  ==  '준홍아 심심해':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="심심할땐 역시 게임이죠!", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content  ==  '///':
+            elif message.content  ==  '준홍아':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="안녕하세요!", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -465,120 +465,120 @@ async def on_message(message):
                #embed.add_field(name="준홍봇 채팅기능", value="유튜브 링크 : 준홍!good good https://www.youtube.com/channel/UCd-1tvBhwKmtvFTNiVUuLmg?view_as=subscriber, 잊니 : https://www.youtube.com/channel/UCH-t6Zw7rR2CjXPTgH7m9Kw", inline=True)
                 #await channel.send(embed=embed)
 
-            elif message.content  ==  '///ㅎㅇ':
+            elif message.content  ==  '준홍아 ㅎㅇ':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="안녕하세요", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content  ==  '///Error':
+            elif message.content  ==  '준홍아 Error':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="Error가 발생했습니다.", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
                         
-            elif message.content  ==  '///미쳤나':
+            elif message.content  ==  '준홍아 미쳤나':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="아니요 도 쳤어요.", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content  ==  '///타자':
+            elif message.content  ==  '준홍아 타자':
                 fltmxm = random.randint(0,2)
                 xkwk=["테스트", "test", "안녕하세요"]
                 cncnf=xkwk[fltmxm]
-                curtime = (time.time())
                 await message.channel.send(f'{cncnf}')
-                #checktime = time.time()
+                checktime = time.time()
                 def check(m):
                     return m.content == f'{cncnf}' and m.channel == channel
                 
-
-                te = time.strftime('%S', curtime)  
-                al = len(hgtk.text.decompose(cncnf)) / te * 60         
+       
                 msg = await client.wait_for('message', check=check)
-                await channel.send(f'{te}')
-                await channel.send(f'@<{message.author.id}>, {te}초, {al}타'.format(msg))
+                end = time.time()
+                et = end - checktime                        # 실제로 걸린 시간을 계산
+                et = format(et, ".2f")
+                al = hgtk.text.decompose(f'{cncnf}') / end * 60     
+                await channel.send(f'@<{message.author.id}>, {et}초, {al}타'.format(msg))
 
-            elif message.content == '///빼에에엑':
+            elif message.content == '준홍아 빼에에엑':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="뻬에에에에에ㅔㄱ", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
             
-            elif message.content == '///주사위':
+            elif message.content == '준홍아 주사위':
                 dice = random.randint(1, 6)
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value=(dice), inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
             
-            elif message.content == '///규카츠':
+            elif message.content == '준홍아 규카츠':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.set_image(url="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA0MDlfOTgg%2FMDAxNTIzMjQ4NTQxOTgy.27rWawoPnQujw6HS4nPxcYjsbdZYnq-Ml3w0Q9DA3ggg.ECeoJu1W2ZiaWM8GvnPKGUylujeSjddKzkVMHZ1MuSYg.JPEG.creamy0080%2F12.%25B4%25EB%25C0%25FC%25C1%25DF%25BE%25D3%25BF%25AA%25B8%25C0%25C1%25FDDSC03358..jpg&type=b400")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
             
-            elif message.content == '///RST':
+            elif message.content == '준홍아 RST':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="아두이노에서 RESET을 담당하는 포트", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///WCDMA':
+            elif message.content == '준홍아 WCDMA':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="와이드밴드 코드분할 다중접속기술, wideband code division multiple access", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///짜장면':
+            elif message.content == '준홍아 짜장면':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.set_image(url="http://post.phinf.naver.net/MjAxNzEyMDVfMTgx/MDAxNTEyNDUzODM1Nzgz.oLCRrLmG048QINV4T7flJ1n5whWnMgXe2FPzjD8wvMog.1fVLRKcFZlnTg3DYFO8wrGnW9wZyZpx7Yd8hkGG3RTsg.JPEG/IIh6-J6mXMeGwnXBKX2yJP5ooR_0.jpg")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///냉면':
+            elif message.content == '준홍아 냉면':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.set_image(url="http://post.phinf.naver.net/MjAxODA2MDdfMzUg/MDAxNTI4MzUyNjUzMDE1.ZA0IG7V1Ghd2c1FAp1JPvH__g8kKncVHOOYj8wkEFn4g.xGGLSjvb4a4Pqu35ghIEh7WhCwRzxm80BWxNo9q1U3Ig.JPEG/I-5vjeJnAa7azL8tI3ihsiYYU6oQ.jpg")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///주소들':
+            elif message.content == '준홍아 주소들':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="서포트 서버 : https://discord.gg/jkWNWgG ", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
             
-            elif message.content == '///삼해트':
+            elif message.content == '준홍아 삼해트':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="삼해트 바보 멍청이", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
             
-            elif message.content == '///개발코드':
+            elif message.content == '준홍아 개발코드':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value='파이썬으로 개발됬어요!', inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///닉네임':
+            elif message.content == '준홍아 닉네임':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value=f"{message.author.display_name} 입니다.", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
 
-            elif message.content == '///discord_api':
+            elif message.content == '준홍아 discord_api':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value='절 많이 도와주는 팀원입니다.', inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///청소'):
+            elif message.content.startswith('준홍아 청소'):
                 #if message.author.id in owner:
                 if message.author.guild_permissions.administrator:
                     varrr=message.content.split(' ')
-                    await message.channel.purge(limit=int(varrr[1])+1)
+                    await message.channel.purge(limit=int(varrr[2])+1)
                     msg=await message.channel.send(embed=discord.Embed(title=f'메시지 {str(int(varrr[2]))}개 삭제 완료!', descirption='응용 기능',timestamp=message.created_at, colour=discord.Colour.blue()).set_footer(icon_url=message.author.avatar_url, text=f'{str(message.author)}, 인증됨'))
                     await asyncio.sleep(3)
                     await msg.delete()
@@ -587,10 +587,10 @@ async def on_message(message):
 
             
 
-            elif message.content.startswith("///cmd"):
+            elif message.content.startswith("준홍아 cmd"):
                 if message.author.id in owner:
                     try:
-                        a = message.content[6:]
+                        a = message.content[8:]
                     except:
                         await message.channel.send("내용을 입력해주세요!")
                         return
@@ -602,8 +602,8 @@ async def on_message(message):
                     await channel.send(embed=embed)
 
                 
-            elif message.content.startswith('///정보'):
-                if str(message.content[5:]) == '':
+            elif message.content.startswith('준홍아 정보'):
+                if str(message.content[7:]) == '':
                     user = message.author
                     date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                     status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
@@ -732,19 +732,19 @@ async def on_message(message):
                             embed.add_field(name="봇 초대링크 (관리자 권한)", value=f"[초대하기](https://discordapp.com/oauth2/authorize?client_id={user.id}&scope=bot&permissions=8)", inline=False)
                             await channel.send(embed=embed)
 
-            elif message.content == '///탕수육':
+            elif message.content == '준홍아 탕수육':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.set_image(url="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20130412_259%2Froyalrate7_1365760080337VvTgW_JPEG%2FDSCN7945.jpg&type=b400")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///감자칩':
+            elif message.content == '준홍아 감자칩':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.set_image(url="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEyMTJfMjA4%2FMDAxNTEzMDc4MjgwMjE5.B5xVKAl3CNo8jaYf0trsO8Wr_8XfJJRjmwn8rO6VNM0g.I5dfl1H7vyDdeK0C0xAx7cNaRyIkEYvzed3gJRhxTGgg.JPEG.changuk1225%2F%25BD%25BA%25C6%25E4%25C0%25CE_%25C6%25E4%25C0%25CE%25C6%25AE%25C5%25EB_%25B0%25A8%25C0%25DA%25C4%25A8_%25BA%25B8%25B4%25D2%25B6%25F3%25B0%25A8%25C0%25DA%25C4%25A8_5.jpg&type=b400")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///뭐해':
+            elif message.content == '준홍아 뭐해':
                 a=random.randint(1,2)
                 if a == 1:
                      embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -757,13 +757,13 @@ async def on_message(message):
                      embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                      await channel.send(embed=embed)
 
-            elif message.content == '///star':
+            elif message.content == '준홍아 star':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="star 잘생김", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///Ms 계산'):
+            elif message.content.startswith('준홍아 Ms 계산'):
                 mes = message.content[10:11]
                 ty = message.content[13:]
 
@@ -779,10 +779,10 @@ async def on_message(message):
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-            elif message.content.startswith('///밴'): #해피야 밴 <@657876471750066186> 나쁜 짓 해떠여
+            elif message.content.startswith('준홍아 밴'): #해피야 밴 <@657876471750066186> 나쁜 짓 해떠여
                 if message.author.guild_permissions.administrator:
-                    author = message.content[4:22]
-                    reason = message.content[23:] + f'\n\n밴 한 사람 : {message.author}'
+                    author = message.content[9:27]
+                    reason = message.content[29:] + f'\n\n밴 한 사람 : {message.author}'
                     await message.guild.get_member(int(author)).ban(reason=reason)
                     await message.channel.send(f"<@{author}> 님이 밴되었어요.\n사유 : {reason}")
                     return None
@@ -790,7 +790,7 @@ async def on_message(message):
                     await channel.send("권한없음")
 
 
-            elif message.content.startswith('///공지'):
+            elif message.content.startswith('준홍아 공지'):
                 if message.author.id in owner:
                     msg=message.content[7:]
                     embed=discord.Embed(
@@ -830,16 +830,16 @@ async def on_message(message):
                     await channel.send("NO 권한")
                     return None
 
-            elif message.content == '///뒤져':
+            elif message.content == '준홍아 뒤져':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="그런말은 나빠요..", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
 
-            elif message.content.startswith("///eval"):
+            elif message.content.startswith("준홍아 eval"):
                 if message.author.id in owner:
-                    a=message.content[7:]
+                    a=message.content[9:]
                     
                     #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
                         #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -901,9 +901,9 @@ async def on_message(message):
                 else:
                     await channel.send("권한없음")
 
-            elif message.content.startswith("///jseval"):
+            elif message.content.startswith("준홍아 jseval"):
                 if message.author.id in owner:
-                    a=message.content[9:]
+                    a=message.content[11:]
                     
                     #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
                         #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -965,9 +965,9 @@ async def on_message(message):
                 else:
                     await channel.send("권한없음")
             
-            elif message.content.startswith("///pyeval"):
+            elif message.content.startswith("준홍아 pyeval"):
                 if message.author.id in owner:
-                    a=message.content[9:]
+                    a=message.content[11:]
                     
                     #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
                         #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -1029,9 +1029,9 @@ async def on_message(message):
                 else:
                     await channel.send("권한없음")
             
-            elif message.content.startswith("///c++eval"):
+            elif message.content.startswith("준홍아 c++eval"):
                 if message.author.id in owner:
-                    a=message.content[10:]
+                    a=message.content[12:]
                     
                     #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
                         #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -1094,13 +1094,13 @@ async def on_message(message):
                 else:
                     await channel.send("권한없음")
 
-            elif message.content == '///승현':
+            elif message.content == '준홍아 승현':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="승현승현승현승현승현승현승현승현승현승현승현승현", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await message.channel.send(embed=embed)
 
-            elif message.content == "///stop":
+            elif message.content == "준홍아 stop":
                 if message.author.id in owner:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 관리기능", value="정지중....", inline=True)
@@ -1108,7 +1108,7 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     os.system("pause") 
 
-            elif message.content == "///reboot":
+            elif message.content == "준홍아 reboot":
                 if message.author.id in owner:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 관리기능", value="재시작중....", inline=True)
@@ -1117,19 +1117,19 @@ async def on_message(message):
                     await client.close()
                     os.system("py V4_1.py")
 
-            elif message.content == '///mswgen':
+            elif message.content == '준홍아 mswgen':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="mswgen바보", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///베인블':
+            elif message.content == '준홍아 베인블':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="팀SB 관리자임 잘 모르겠지만 어쨌든 그런거임ㅋ",inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith('///캡챠'):
+            elif message.content.startswith('준홍아 캡챠'):
                 Image_captcha = ImageCaptcha()
                 msg = ""
                 a = ""
@@ -1155,7 +1155,7 @@ async def on_message(message):
                     await message.channel.send("오답입니다.")
 
 
-            elif message.content == '///LoL':
+            elif message.content == '준홍아 LoL':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="Riot Games가 개발한 League of Legends",inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -1168,7 +1168,7 @@ async def on_message(message):
                 #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 #await channel.send(embed=embed)
 
-            elif message.content == '///업타임':
+            elif message.content == '준홍아 업타임':
                 current_time = time.time()
                 difference = int(round(current_time - start_time))
                 text = str(datetime.timedelta(seconds=difference))
@@ -1178,15 +1178,15 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content == '///봇켜짐?':
+            elif message.content == '준홍아 봇켜짐?':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="ㅇㅇ 켜짐", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith("///계산"):
+            elif message.content.startswith("준홍아 계산"):
                 channel = message.channel
-                math = message.content[6:]
+                math = message.content[7:]
                 if math == "":
                     await message.channel.send('계산식를 입력해주세요')
                 elif len(message.mentions) >= 1 or len(message.role_mentions) >= 1 or len(message.channel_mentions) >= 1:
@@ -1211,7 +1211,7 @@ async def on_message(message):
                     except:
                         await channel.send("계산식이 올바르지 않습니다..")
 
-            elif message.content == '///애교해봐':
+            elif message.content == '준홍아 애교해봐':
                 p = random.randint(1,3)
                 if p == 1:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
