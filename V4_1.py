@@ -496,9 +496,9 @@ async def on_message(message):
                 msg = await client.wait_for('message', check=check)
                 end = time.time()
                 et = end - checktime                        # 실제로 걸린 시간을 계산
-                et = format(et, ".2f")
+                #et = format(et, ".2f")
                 al = len(hgtk.text.decompose(f'{cncnf}')) / end * 60     
-                await channel.send(f'@<{message.author.id}>, {et}초, {al}타'.format(msg))
+                await channel.send(f'<@{message.author.id}>, {et}초, {al}타'.format(msg))
 
             elif message.content == '준홍아 빼에에엑':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
