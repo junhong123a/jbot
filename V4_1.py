@@ -497,7 +497,7 @@ async def on_message(message):
                 end = time.time()
                 et = end - checktime                        # 실제로 걸린 시간을 계산
                 et = format(et, ".2f")
-                al = len(hgtk.text.decompose(f'{cncnf}')) / et * 60
+                al = len(hgtk.text.decompose(f'{cncnf}')) / float(et) * 60
                 await channel.send(f'<@{message.author.id}>, {et}초, {al}타')
 
             elif message.content == '준홍아 빼에에엑':
