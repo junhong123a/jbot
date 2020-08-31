@@ -44,6 +44,9 @@ game = discord.Game("준홍아 도움")
 
 #패기물
 
+@client.event
+async def on_mention():
+    await channel.send("안녕하세요")
 
 @client.event
 async def on_reaction_add(reaction, user):
