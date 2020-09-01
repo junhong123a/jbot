@@ -578,8 +578,8 @@ async def on_message(message):
                 await channel.send(embed=embed)
 
             elif message.content.startswith('준홍아 청소'):
-                #if message.author.id in owner:
-                if message.author.guild_permissions.administrator:
+                if message.author.id in owner:
+                #if message.author.guild_permissions.administrator:
                     varrr=message.content.split(' ')
                     await message.channel.purge(limit=int(varrr[2])+1)
                     msg=await message.channel.send(embed=discord.Embed(title=f'메시지 {str(int(varrr[2]))}개 삭제 완료!', descirption='응용 기능',timestamp=message.created_at, colour=discord.Colour.blue()).set_footer(icon_url=message.author.avatar_url, text=f'{str(message.author)}, 인증됨'))
