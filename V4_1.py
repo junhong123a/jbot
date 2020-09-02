@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-import discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, smtplib, ctx, sys, configparser, platform, psutil, math, io, calendar
+import discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, smtplib, ctx, sys, configparser, platform, psutil, math, io, calendar,hgtk,psycopg2
 from PIL import Image
 from itertools import cycle
 from urllib.request import urlopen, Request
@@ -7,11 +7,8 @@ from bs4 import BeautifulSoup
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 from shutil import copyfile
-import configparser
 from json import loads
 from captcha.image import ImageCaptcha
-import hgtk
-import psycopg2
 
 # 초성 리스트. 00 ~ 18
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -20,9 +17,6 @@ JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 
 # 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
-#conn = psycopg2.connect(host='ec2-54-197-254-117.compute-1.amazonaws.com', DATABASE_URL='postgres://jtvmlvvejdmcfl:0f89695e903ff0a4a863f5aa972615679ba98d39c356404298bddd4d8a722030@ec2-54-197-254-117.compute-1.amazonaws.com:5432/d360stjjckv90q', dbname='d360stjjckv90q', user='postgres', password='0f89695e903ff0a4a863f5aa972615679ba98d39c356404298bddd4d8a722030', port='5432') # db에 접속
-#cur = conn.cursor()
-#cur.execute("CREATE TABLE test_table (title varchar, content text);") 
 
 logchannel = 727388709485543485
 errorchannel = 727388190549475400
@@ -44,9 +38,7 @@ game = discord.Game("준홍아 도움")
 
 #패기물
 
-@client.event
-async def on_mention():
-    await channel.send("안녕하세요")
+
 
 @client.event
 async def on_reaction_add(reaction, user):
@@ -110,9 +102,6 @@ async def on_message(message):
                 embed.add_field(name="안내사항", value="준홍봇의 개발자 준홍은 봇 도우미로 활동하고 있습니다. 도움이 필요하신분은 준홍!good good#8922로 DM  주시기바랍니다.", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
-
-            elif message.content == f'<@{client.user.id}>':
-                await channel.send("안녕하세요! 준홍봇입니다.")
 
             elif message.content == "준홍아 comjun04":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -493,12 +482,12 @@ async def on_message(message):
                 await message.channel.send(f'{cncnf}')
                 checktime = time.time()
                 def check(m):
-                    return m.content == f'{cncnf}' and m.channel == channel
+                    return m.content == f'{cncnf}' and m.channel == channel #해볼까
                 
        
-                msg = await client.wait_for('message', check=check)
+                msg = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=20)
                 end = time.time()
-                et = end - checktime                        # 실제로 걸린 시간을 계산
+                et = end - checktime                     # 실제로 걸린 시간을 계산
                 et = format(et, ".2f")
                 al = len(hgtk.text.decompose(f'{cncnf}')) / float(et) * 60
                 await channel.send(f'<@{message.author.id}>, {et}초, {round(al,2)}타')
