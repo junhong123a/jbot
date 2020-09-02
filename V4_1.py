@@ -321,10 +321,10 @@ async def on_message(message):
 
             elif message.content.startswith('준홍아 내정보'):
                 date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
-                status_dict: dict = {discord.Status.online: '<:1_:599936558883143683> 온라인',
-                    discord.Status.offline: '<:offline:599936559034269697> 오프라인',
-                    discord.Status.idle: "<:2_:599936558937931777> 자리비움",
-                    discord.Status.do_not_disturb: "<:3_:599936559072018433> 방해금지"}
+                status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                    discord.Status.offline: ' <:status_offline:728527943831126036> 오프라인',
+                    discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                    discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
                 user_status = status_dict[message.author.status]
                 roles=[role for role in message.author.roles]
                 embed=discord.Embed(colour=message.author.color, timestamp=message.created_at)
@@ -410,17 +410,17 @@ async def on_message(message):
                 embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=False)
                 embed.add_field(name="서버 멤버 수", value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)', inline=True)
                 embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)
-                embed.add_field(name="서버 부스트 레벨", value=f'<:boost:689765177532612648> {message.guild.premium_tier}레벨', inline=True)
-                embed.add_field(name="서버 부스트 횟수", value=f'<:boost:689765177532612648> {message.guild.premium_subscription_count}번', inline=True)
+                embed.add_field(name="서버 부스트 레벨", value=f'<:boost:707784277307293747> {message.guild.premium_tier}레벨', inline=True)
+                embed.add_field(name="서버 부스트 횟수", value=f'<:boost:707784277307293747> {message.guild.premium_subscription_count}번', inline=True)
                 embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=False)
                 if message.guild.afk_channel != None:
-                    embed.add_field(name = f'잠수 채널', value = f'<a:yes:690124935179272211> 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = True)
+                    embed.add_field(name = f'잠수 채널', value = f'<a:yes:707786803414958100> 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = True)
                 else:
-                    embed.add_field(name="잠수 채널", value="<a:no:690124433406558208> 잠수 채널이 없습니다.")
+                    embed.add_field(name="잠수 채널", value="<a:no:707786855143309370> 잠수 채널이 없습니다.")
                 if message.guild.system_channel != None:
-                    embed.add_field(name = f'시스템 채널', value = f'<a:yes:690124935179272211> 시스템 채널이 있습니다.\n<#{message.guild.system_channel.id}>', inline = True)
+                    embed.add_field(name = f'시스템 채널', value = f'<a:yes:707786803414958100> 시스템 채널이 있습니다.\n<#{message.guild.system_channel.id}>', inline = True)
                 else:
-                    embed.add_field(name="잠수 채널", value="<a:no:690124433406558208> 시스템 채널이 없습니다.")
+                    embed.add_field(name="잠수 채널", value="<a:no:707786855143309370> 시스템 채널이 없습니다.")
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
@@ -625,10 +625,10 @@ async def on_message(message):
                         user = message.guild.get_member(int(message.content.split('<@!')[1].split('>')[0]))
                         if user.bot == False:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
-                                discord.Status.offline: '<:status_offline:707783990953771069> 오프라인',
-                                discord.Status.idle: "<:status_idle:707783934095917106> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:707783959634903110> 방해금지"}
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
@@ -649,10 +649,10 @@ async def on_message(message):
                             await channel.send(embed=embed)
                         else:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
-                                discord.Status.offline: '<:status_offline:707783990953771069> 오프라인',
-                                discord.Status.idle: "<:status_idle:707783934095917106> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:707783959634903110> 방해금지"}
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
@@ -676,10 +676,10 @@ async def on_message(message):
                         user = message.guild.get_member(int(message.content.split('<@')[1].split('>')[0]))
                         if user.bot == False:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
-                                discord.Status.offline: '<:status_offline:707783990953771069> 오프라인',
-                                discord.Status.idle: "<:status_idle:707783934095917106> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:707783959634903110> 방해금지"}
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
@@ -700,10 +700,10 @@ async def on_message(message):
                             await channel.send(embed=embed)
                         else:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
-                                discord.Status.offline: '<:status_offline:707783990953771069> 오프라인',
-                                discord.Status.idle: "<:status_idle:707783934095917106> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:707783959634903110> 방해금지"}
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
