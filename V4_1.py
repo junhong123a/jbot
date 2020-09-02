@@ -82,6 +82,10 @@ async def on_message(message):
             return None
 
         if message.author.id in ban:
+            embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+            embed.add_field(name="준홍봇 알림기능", value="당신은 밴(블랙리스트)되셨습니다." , inline=True)
+            embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+            await channel.send(embed=embed)
             return None
 
         #banlist=['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell','dir']
@@ -158,6 +162,14 @@ async def on_message(message):
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
+
+            elif message.content == "준홍아 블랙":
+                b = message.content[7:]
+                ban.append(b)
+                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 블랙기능", value="블랙추가 완료", inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
 
             elif message.content  ==  '준홍아 수현':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
