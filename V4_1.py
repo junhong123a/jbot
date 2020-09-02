@@ -396,31 +396,31 @@ async def on_message(message):
                 
 
             elif message.content == '준홍아 섭정보' or message.content == "준홍아 서버정보":
+                channel = message.channel
                 rnrrk = message.guild.region
-                print(message.guild.region)
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"서버 정보 - {message.guild.name}")
-                embed.set_thumbnail(url=message.guild.icon_url)
                 embed.add_field(name="서버 기본정보", value="서버의 기본 정보입니다.", inline=False)
-                embed.add_field(name="서버 이름", value=message.guild.name, inline=True)
-                embed.add_field(name="서버 ID", value=message.guild.id, inline=True)
-                embed.add_field(name="서버 위치", value=rnrrk, inline=True)
-                embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=True)
-                embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=True)
-                embed.add_field(name="서버 채널 수", value=f'전체 채널: {len(message.guild.channels)}개 (채팅채널 : {len(message.guild.text_channels)}개 | 음성채널 : {len(message.guild.voice_channels)}개 | 카테고리 : {len(message.guild.categories)}개)', inline=True)
+                embed.add_field(name="서버 이름", value=message.guild.name, inline=False)
+                embed.add_field(name="서버 ID", value=message.guild.id, inline=False)
+                embed.add_field(name="서버 위치", value=rnrrk, inline=False)
+                embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=False)
+                embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=False)
+                embed.add_field(name="서버 채널 수", value=f'전체 채널: {len(message.guild.channels)}개 (채팅채널 : {len(message.guild.text_channels)}개 | 음성채널 : {len(message.guild.voice_channels)}개 | 카테고리 : {len(message.guild.categories)}개)', inline=False)
                 embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=False)
-                embed.add_field(name="서버 멤버 수", value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)', inline=True)
+                embed.add_field(name="서버 멤버 수", value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)', inline=False)
                 embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)
-                embed.add_field(name="서버 부스트 레벨", value=f'<:boost:689765177532612648> {message.guild.premium_tier}레벨', inline=True)
-                embed.add_field(name="서버 부스트 횟수", value=f'<:boost:689765177532612648> {message.guild.premium_subscription_count}번', inline=True)
+                embed.add_field(name="서버 부스트 레벨", value=f'{message.guild.premium_tier}레벨', inline=False)
+                embed.add_field(name="서버 부스트 횟수", value=f'{message.guild.premium_subscription_count}번', inline=False)
                 embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=False)
                 if message.guild.afk_channel != None:
-                    embed.add_field(name = f'잠수 채널', value = f'<a:yes:690124935179272211> 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = True)
+                    embed.add_field(name = f'잠수 채널', value = f':white_check_mark: 잠수 채널이 있습니다.\n{message.guild.afk_channel.name} (타이머: {message.guild.afk_timeout})', inline = False)
                 else:
-                    embed.add_field(name="잠수 채널", value="<a:no:690124433406558208> 잠수 채널이 없습니다.")
+                    embed.add_field(name="잠수 채널", value=":no_entry_sign: 잠수 채널이 없습니다.",inline=False)
                 if message.guild.system_channel != None:
-                    embed.add_field(name = f'시스템 채널', value = f'<a:yes:690124935179272211> 시스템 채널이 있습니다.\n<#{message.guild.system_channel.id}>', inline = True)
+                    embed.add_field(name = f'시스템 채널', value = f':white_check_mark: 시스템 채널이 있습니다.\n<#{message.guild.system_channel.id}>', inline = False)
                 else:
-                    embed.add_field(name="잠수 채널", value="<a:no:690124433406558208> 시스템 채널이 없습니다.")
+                    embed.add_field(name="시스템 채널", value=":no_entry_sign: 시스템 채널이 없습니다.",inline=False)
+                embed.set_thumbnail(url=message.guild.icon_url)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
