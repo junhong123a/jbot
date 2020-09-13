@@ -1146,7 +1146,7 @@ async def on_message(message):
 
             elif message.content.startswith("준홍아 웹뷰"):
                 aa = message.content[7:]
-                namd = str(aa) + ".png"
+                namd = str(aa)
                 file=discord.File(namd)
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title="준홍봇 웹뷰기능")
                 embed.set_image(url=file)
