@@ -30,6 +30,7 @@ id = 503502157925056514
 ban = []
 
 
+#빌드
 start_time = time.time()
 
 client = discord.Client()
