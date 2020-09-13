@@ -36,7 +36,7 @@ client = discord.Client()
 game = discord.Game("준홍아 도움")    
 
 
-
+#패기물
 
 
 
@@ -1146,8 +1146,11 @@ async def on_message(message):
 
             elif message.content.startswith("준홍아 웹뷰"):
                 aa = message.content[7:]
-                namd = str(a) + ".png"
-                await channel.send(file=discord.File(name))
+                namd = str(aa) + ".png"
+                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title="준홍봇 웹뷰기능")
+                embed.set_image(file=discord.File(namd))
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
 
 
             elif message.content == '준홍아 LoL':
