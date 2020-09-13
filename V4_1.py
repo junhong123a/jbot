@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-import discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, smtplib, ctx, sys, configparser, platform, psutil, math, io, calendar,hgtk,psycopg2
+import discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, smtplib, ctx, sys, configparser, platform, psutil, math, io, calendar,hgtk,psycopg2,webview
 from PIL import Image
 from itertools import cycle
 from urllib.request import urlopen, Request
@@ -183,20 +183,6 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            #elif message.content == "준홍아 test":
-                #cur.execute("INSERT INTO numbers VALUES (%s)", (42,))
-
-            #elif message.content == "준홍아 test2":
-                #cur.execute("SELECT * FROM test;")
-                #await channel.send(cur.fetchone())
-
-                #  데이터를 변경했다면 반드시 .commit() 해주어야 한다
-                #conn.commit()
-
-                # 커서를 닫고 연걸을 종료한다.
-                #cur.close()
-                #vconn.close()
-
             elif message.content == '준홍아 도움':
                 try: 
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -205,8 +191,8 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     time.sleep(3)
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요, 개발자는 준홍!good goodd#8922 입니다. ", value="도움말 시작", inline=True)
-                    embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집, comjun04', inline=True)
+                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
+                    embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집, comjun04, 웹뷰', inline=True)
                     embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : 준홍아 찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: 준홍아 건의 건의내용 ,심심해,준홍아,ㅎㅇ,Error", inline=True)
                     embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검, 호스팅", inline=True)
                     embed.add_field(name="기본명령어4", value="뭐해, star, Ms 계산 Ms계산 형식: 준홍아 Ms 계산 초 또는 m 초 또는 ms, 뒤져, 승현,mswgen,베인블,캡챠,LOL,현재시각,업타임,봇켜짐?,계산 계산형식:준홍아계산 계산식,애교해봐, 날씨 날씨형식: 준홍아 날씨 지역명", inline=True)
@@ -1157,6 +1143,11 @@ async def on_message(message):
                     await message.channel.send("정답입니다!")
                 else:
                     await message.channel.send("오답입니다.")
+
+            elif message.content.startswith("준홍아 웹뷰"):
+                aa = message.content[7:]
+                namd = str(a) + ".png"
+                await channel.send(file=discord.File(name))
 
 
             elif message.content == '준홍아 LoL':
