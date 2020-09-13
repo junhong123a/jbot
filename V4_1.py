@@ -36,7 +36,7 @@ client = discord.Client()
 game = discord.Game("준홍아 도움")    
 
 
-#패기물
+
 
 
 
