@@ -30,7 +30,6 @@ id = 503502157925056514
 ban = []
 
 
-#빌드
 start_time = time.time()
 
 client = discord.Client()
@@ -1182,6 +1181,10 @@ async def on_message(message):
                 embed.add_field(name="준홍봇 채팅기능", value="ㅇㅇ 켜짐", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
+
+            elif message.content.startswith('준홍아 사진'):
+                pic = message.content.split(' ')[2]
+                await channel.send(file=discord.File(pic))
 
             elif message.content.startswith("준홍아 계산"):
                 channel = message.channel
