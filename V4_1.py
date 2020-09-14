@@ -417,7 +417,7 @@ async def on_message(message):
 
             elif message.content.startswith('준홍아 건의'):
                 try:
-                    msg = message.content[7:]
+                    msg = str(message.content[7:])
                     if(msg == None):
                         await channel.send("사용방법: 준홍아 건의 할말")
                     else:
