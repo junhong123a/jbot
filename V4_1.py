@@ -88,11 +88,6 @@ async def on_message(message):
             await channel.send(embed=embed)
             return None
 
-        #banlist=['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell','dir']
-        #for banword in banlist:
-            #if banword in message.content:
-                #return None
-
         if message.content.startswith('준홍아'):
             embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
             embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
@@ -125,8 +120,6 @@ async def on_message(message):
 
                     
             elif message.content  ==  '준홍아 핑':
-                #정상, 불안정, 조금 불안정!, 매우 불안정! 심각
-                #0,999 1000,2000 2001,3000 3001,6000 6001 100000
                 vld = client.latency * 1000
                 if vld >= 0 and vld <= 199:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -425,12 +418,15 @@ async def on_message(message):
             elif message.content.startswith('준홍아 건의'):
                 try:
                     msg = message.content[7:]
-                    await channel.send("건의가 완료되었습니다!")
-                    await client.get_channel(int(gunlog)).send(f'<@447934468603379724>')
-                    embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 건의", value=f'{message.author}({message.author.id})님의 건의 : {msg}', inline=True)
-                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                    await client.get_channel(int(gunlog)).send(embed=embed)
+                    if(msg == None):
+                        await channel.send("사용방법: 준홍아 건의 할말")
+                    else:
+                        await channel.send("건의가 완료되었습니다!")
+                        await client.get_channel(int(gunlog)).send(f'<@447934468603379724>')
+                        embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                        embed.add_field(name="준홍봇 건의", value=f'{message.author}({message.author.id})님의 건의 : {msg}', inline=True)
+                        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                        await client.get_channel(int(gunlog)).send(embed=embed)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 건의 할말", inline=True)
@@ -448,12 +444,6 @@ async def on_message(message):
                 embed.add_field(name="준홍봇 채팅기능", value="안녕하세요!", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
-
-            #elif message.content  ==  '준홍아 유튜브':
-                #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                 #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-               #embed.add_field(name="준홍봇 채팅기능", value="유튜브 링크 : 준홍!good good https://www.youtube.com/channel/UCd-1tvBhwKmtvFTNiVUuLmg?view_as=subscriber, 잊니 : https://www.youtube.com/channel/UCH-t6Zw7rR2CjXPTgH7m9Kw", inline=True)
-                #await channel.send(embed=embed)
 
             elif message.content  ==  '준홍아 ㅎㅇ':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -890,71 +880,7 @@ async def on_message(message):
     ```"""))
                 else:
                     await channel.send("권한없음")
-
-            elif message.content.startswith("준홍아 jseval"):
-                if message.author.id in owner:
-                    a=message.content[11:]
-                    
-                    #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
-                        #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                        #embed.add_field(name="준홍봇 안내기능", value=f'{message.content} 그 명령어는 금지된 단어가 포함되어있습니다.', inline=True)
-                        #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                        #await message.channel.send(embed=embed)
-                        #return None
-
-                    try:
-                        msg=await message.channel.send(embed=discord.Embed(color=0x85CFFF, title="evaling...",description=f"""📥INPUT📥
-    ```js
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    evaling...
-    ```"""))
-                        aa=await eval(a)
-                    except Exception as e:
-                        await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-                        
-    ```js
-    {a}          
-    ```
-    📤OUTPUT📤
-    ```py
-    {e}
-    ```"""))
-                        try:
-                            aa = eval(a)
-                        except Exception as e:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-                        
-    ```js
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {e}
-    ```"""))
-                        else:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT📥
-    ```js
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {aa}
-    ```""")) 
-                    else:
-                        await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-    ```js
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {aa}
-    ```"""))
-                else:
-                    await channel.send("권한없음")
-            
+  
             elif message.content.startswith("준홍아 pyeval"):
                 if message.author.id in owner:
                     a=message.content[11:]
@@ -1019,71 +945,6 @@ async def on_message(message):
                 else:
                     await channel.send("권한없음")
             
-            elif message.content.startswith("준홍아 c++eval"):
-                if message.author.id in owner:
-                    a=message.content[12:]
-                    
-                    #if message.content in ['output','token', 'file=', 'os', 'logout', 'login', 'quit', 'exit', 'sys', 'shell', 'dir']:
-                        #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                        #embed.add_field(name="준홍봇 안내기능", value=f'{message.content} 그 명령어는 금지된 단어가 포함되어있습니다.', inline=True)
-                        #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                        #await message.channel.send(embed=embed)
-                        #return None
-
-                    try:
-                        msg=await message.channel.send(embed=discord.Embed(color=0x85CFFF, title="evaling...",description=f"""📥INPUT📥
-    ```c++
-    {a}
-    ```
-    📤OUTPUT📤
-    
-    ```py
-    evaling...
-    ```"""))
-                        aa=await eval(a)
-                    except Exception as e:
-                        await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-                        
-    ```c++
-    {a}          
-    ```
-    📤OUTPUT📤
-    ```py
-    {e}
-    ```"""))
-                        try:
-                            aa = eval(a)
-                        except Exception as e:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-                        
-    ```c++
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {e}
-    ```"""))
-                        else:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT📥
-    ```c++
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {aa}
-    ```""")) 
-                    else:
-                        await msg.edit(embed=discord.Embed(color=0x85CFFF, title="eval",description=f"""📥INPUT📥
-    ```c++
-    {a}
-    ```
-    📤OUTPUT📤
-    ```py
-    {aa}
-    ```"""))
-                else:
-                    await channel.send("권한없음")
-
             elif message.content == '준홍아 승현':
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="승현승현승현승현승현승현승현승현승현승현승현승현", inline=True)
