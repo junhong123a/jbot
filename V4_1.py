@@ -770,7 +770,7 @@ async def on_message(message):
                     await channel.send("권한없음")
 
 
-            elif message.content.startswith('준홍아 공지'):
+            elif message.content.startswith('>>공지'):
                 if message.author.id in owner:
                     msg=message.content[7:]
                     embed=discord.Embed(
