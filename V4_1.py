@@ -771,9 +771,9 @@ async def on_message(message):
                     await channel.send("권한없음")
 
 
-            elif message.content.startswith('>>공지'):
+            elif message.content.startswith('준홍아 공지'):
                 if message.author.id in owner:
-                    msg=message.content[4:]
+                    msg=message.content[7:]
                     embed=discord.Embed(
                         title=msg.split('and')[0],
                         description=msg.split('and')[1] + '\n\n이 체널에 공지가 오는것이 싫다면 `봇-공지` 채널을 만들어주세요! \n\n[팀 SB 디스코드](http://discord.gg/UeWTsCg)\n[코어 엔터테인먼트](https://discord.gg/TeCpcBq)',
