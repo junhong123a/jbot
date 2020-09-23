@@ -1,3 +1,4 @@
+
 from pymongo import MongoClient
 import discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, smtplib, ctx, sys, configparser, platform, psutil, math, io, calendar,hgtk,psycopg2,webview
 from PIL import Image
@@ -14,7 +15,7 @@ from captcha.image import ImageCaptcha
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 # 중성 리스트. 00 ~ 20
 JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ']
-# 종성 리스트. 00 ~ 27 + 1(1개 없음) dw
+# 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
 
@@ -88,11 +89,11 @@ async def on_message(message):
             await channel.send(embed=embed)
             return None
 
-        #if message.content.startswith('준홍아'):
-            #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-            #embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
-            #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-            #await client.get_channel(int(logchannel)).send(embed=embed)
+        if message.content.startswith('준홍아'):
+            embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+            embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
+            embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+            await client.get_channel(int(logchannel)).send(embed=embed)
 
             if message.content == "준홍아 안녕":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
