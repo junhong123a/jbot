@@ -772,7 +772,7 @@ async def on_message(message):
 
             elif message.content.startswith('>>공지'):
                 if message.author.id in owner:
-                    msg=message.content[7:]
+                    msg=message.content[4:]
                     embed=discord.Embed(
                         title=msg.split('and')[0],
                         description=msg.split('and')[1] + '\n\n이 체널에 공지가 오는것이 싫다면 `봇-공지` 채널을 만들어주세요! \n\n[팀 SB 디스코드](http://discord.gg/UeWTsCg)\n[코어 엔터테인먼트](https://discord.gg/TeCpcBq)',
