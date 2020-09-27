@@ -926,7 +926,7 @@ async def on_message(message):
     {e}
     ```"""))
                         else:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT📥
+                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT����������������
     ```py
     {a}
     ```
