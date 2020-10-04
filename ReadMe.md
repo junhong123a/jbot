@@ -3,7 +3,12 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f2e60d5081b6419b86a2fa8ac71ceeb2)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=junhong123a/jbot&amp;utm_campaign=Badge_Grade)
 
-<hr/>
+준홍봇은 여러 채팅관련 (곧) 기능등를 이용할수 있는 봇입니다.
+
+특징
+=========
+* embed의 색상을 민트색으로 사용
+* ~~개발자가 개발안함~~
 
 봇 소개
 =========
