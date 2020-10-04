@@ -12,4 +12,4 @@
 
 모듈 설치법
 ===========
-* 제가 사용하는 모듈들을 설치하고 싶다면 이 저장소를 git으로 clone 후 `git clone` 폴더 내부의 m_install.bat 를 실행하시면 됩니다.
+* 제가 사용하는 모듈들을 설치하고 싶다면 이 저장소를 git으로 clone 후 `git clone https://github.com/junhong123a/jbot.git` 폴더 내부의 m_install.bat 를 실행하시면 됩니다.
