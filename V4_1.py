@@ -15,18 +15,18 @@ from captcha.image import ImageCaptcha
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 # 중성 리스트. 00 ~ 20
 JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ']
-# 종성 리스트. 00 ~ 27 + 1(1개 없어]
+# 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
 
-logchannel = 704252617680748618
-errorchannel = 704252617680748618
+logchannel = 762179726927986718
+errorchannel = 762179910004506634
 owner = [447934468603379724, 340373909339635725,736075831226662984]
 botjoinchannel = 704252617680748618
-readylog = 704252617680748618
+readylog = 762180021422391336
 botleavelog = 704252617680748618
-gunlog = 704252617680748618
-Emergency = 704252617680748618
+gunlog = 762179801712558080
+Emergency = 762179874772484106
 id = 503502157925056514
 ban = []
 
@@ -297,8 +297,8 @@ async def on_message(message):
                     mes = message.content
                     index = mes[4:]
                     embedadmin = discord.Embed(title = index,description = "보낸사람 <@%s>" %(str(message.author.id)))
-                    channelid = 727388627486769193  #글이 작성되는 채널
-                    adminch = 727388627486769193 # 보낸사람이 누군지 확인할수있는 채널id
+                    channelid = 762180378844463155  #글이 작성되는 채널
+                    adminch = 762180378844463155 # 보낸사람이 누군지 확인할수있는 채널id
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="익명메세지", value=(index), inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -1113,5 +1113,7 @@ async def on_message(message):
         await channel.send(embed=embed)
         await client.get_channel(int(errorchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}')
 
-access_token = os.environ["BOT_TOKEN"]
-client.run(access_token)
+#access_token = os.environ["BOT_TOKEN"]
+#client.run(access_token)
+
+client.run("NTAzNTAyMTU3OTI1MDU2NTE0.W8xI7Q.ILzzEPqbV8V4SXqBKOKAOhM0PiI")
