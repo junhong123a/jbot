@@ -13,4 +13,7 @@
 봇 코드 설치
 =========
 
-1.우선 git으로 해당 저장소를 clone 한다 `git clone 
+준비사항
+---------
+
+1.우선 git으로 해당 저장소를 clone 한다 `git clone https://github.com/junhong123a/jbot.git`
