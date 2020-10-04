@@ -9,20 +9,3 @@
 =========
 * embed의 색상을 민트색으로 사용
 * ~~개발자가 개발안함~~
-
-봇 코드 설치
-=========
-
-준비사항
----------
-* Python 3.7 이상
-* VS code
-* 디스코드 계정
-* cmd
-
-
-설치
---------
-
-1.우선 git으로 해당 저장소를 clone 한다 `git clone https://github.com/junhong123a/jbot.git`
-2. require
