@@ -366,8 +366,7 @@ async def on_message(message):
                 Ozon = CheckDust[2][:-2] + " " + CheckDust[2][-2:]
             
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at,  title=f'{location} 날씨')
-                embed.add_field(name="=========================", value="사용해 주셔서 감사합니다!", inline=True)
-                embed.add_field(name="정보", value=f'{location} 날씨 정보입니다.', inline=False)
+                embed.add_field(name="=========================", value=f"{Finallocation} 정보입니다", inline=True)
                 embed.add_field(name="현재온도", value=f'{NowTemp}', inline=True)
                 embed.add_field(name="체감온도", value=f'{TodayFeelTemp}', inline=True)
                 embed.add_field(name="오전/오후 온도", value=f'{TodayMorningTemp} / {TodayAfternoonTemp}', inline=True)
@@ -926,7 +925,7 @@ async def on_message(message):
     {e}
     ```"""))
                         else:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT����������������
+                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT��������������������
     ```py
     {a}
     ```
