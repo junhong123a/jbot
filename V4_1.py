@@ -21,7 +21,7 @@ JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', '�
 
 logchannel = 762179726927986718
 errorchannel = 762179910004506634
-owner = [447934468603379724, 340373909339635725,736075831226662984]
+owner = [447934468603379724, 340373909339635725, 393674169243402240]
 botjoinchannel = 704252617680748618
 readylog = 762180021422391336
 botleavelog = 704252617680748618
@@ -32,9 +32,14 @@ ban = []
 
 
 start_time = time.time()
+intents = discord.Intents.default()
+intents.typing = False
+intents.presences = True
+intents.members = True
 
-client = discord.Client()
-game = discord.Game("준홍아 도움")    
+client = discord.Client(intents=intents)
+game = discord.Game("준홍아 도움")
+
 
 
 #패기물
@@ -185,7 +190,7 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     time.sleep(3)
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요 ", value="도움말 시작", inline=True)
+                    embed.add_field(name="안녕하세요! 명령어들 앞에는 `준홍아` 라는 칭호가 붙어요, 다음 도움말을 보시려면 반응을 클릭해주새요", value="도움말 시작", inline=True)
                     embed.add_field(name="준홍봇 도움말", value='기본명령어: 안녕, 핑, 수현, 도움, 죽어, say say형식 : 준홍아 say 할말, esay esay형식 : 준홍아 esay 할말, 네집, comjun04, 웹뷰', inline=True)
                     embed.add_field(name="기본명령어2:", value="찬반투표 찬반투표형식 : 준홍아 찬반투표 제목, 익명, 내정보, 내프사, 섭정보, 건의 건의 형식: 준홍아 건의 건의내용 ,심심해,준홍아,ㅎㅇ,Error", inline=True)
                     embed.add_field(name="기본명령어3", value="미쳤나, 빼에에엑, 주사위, 규카츠, RST, WCDMA, 짜장면, 냉면, 주소들, 삼해트, 개발코드, 닉네임, discord_api,정보,탕수육,감자칩, 실검, 호스팅", inline=True)
@@ -313,10 +318,10 @@ async def on_message(message):
 
             elif message.content.startswith('준홍아 내정보'):
                 date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
-                status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
-                    discord.Status.offline: ' <:status_offline:728527943831126036> 오프라인',
-                    discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
-                    discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
+                status_dict: dict = {discord.Status.online: '<:status_online:754547779845750864> 온라인',
+                    discord.Status.offline: '<:status_offline:754547779606544394> 오프라인',
+                    discord.Status.idle: "<:status_idle:754547779174531114> 자리비움",
+                    discord.Status.do_not_disturb: "<:status_dnd:754547779048570970> 방해금지"}
                 user_status = status_dict[message.author.status]
                 roles=[role for role in message.author.roles]
                 embed=discord.Embed(colour=message.author.color, timestamp=message.created_at)
@@ -393,7 +398,7 @@ async def on_message(message):
                 embed.set_thumbnail(url=message.guild.icon_url)
                 embed.add_field(name="서버 기본정보", value="서버의 기본 정보입니다.", inline=False)
                 embed.add_field(name="서버 이름", value=message.guild.name, inline=True)
-                embed.add_field(name="서버 ID", value=message.guild.id, inline=True)
+                #embed.add_field(name="서버 ID", value=message.guild.id, inline=True)
                 embed.add_field(name="서버 위치", value=rnrrk, inline=True)
                 embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=True)
                 embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=True)
@@ -585,17 +590,17 @@ async def on_message(message):
             elif message.content.startswith('준홍아 정보'):
                 if str(message.content[7:]) == '':
                     user = message.author
-                    date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
-                    status_dict: dict = {discord.Status.online: '<:status_online:707783912121696256> 온라인',
-                        discord.Status.offline: '<:status_offline:707783990953771069> 오프라인',
-                        discord.Status.idle: "<:status_idle:707783934095917106> 자리비움",
-                        discord.Status.do_not_disturb: "<:status_dnd:707783959634903110> 방해금지"} # 님 어떻게 됬음??/ 고쳣는데 왜 적용이 안됨..; 저장 Autosave no? 왔? 그게 뭐꼬 
+                    date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
+                    status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                        discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                        discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                        discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"} # 님 어떻게 됬음??/ 고쳣는데 왜 적용이 안됨..; 저장 Autosave no? 왔? 그게 뭐꼬 
                     user_status = status_dict[user.status]
                     if not len(message.author.roles) == 1:
                         roles = [role for role in user.roles]
                         embed=discord.Embed(colour=message.author.color, timestamp=message.created_at, title=f"유저정보 - {user}")
                     else:
-                        embed=discord.Embed(colour=0xff00, timestamp=message.created_at, title=f"유저정보 - {user}")
+                        embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"유저정보 - {user}")
                     embed.set_thumbnail(url=user.avatar_url)
                     embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
                     embed.add_field(name="아이디", value=f"{user.id}", inline=False)
@@ -610,9 +615,9 @@ async def on_message(message):
                     await channel.send(embed=embed)
                 else:
                     try:
-                        user = message.guild.get_member(int(message.content.split('<@!')[1].split('>')[0]))
+                        
                         if user.bot == False:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
                                 discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
                                 discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
@@ -620,7 +625,7 @@ async def on_message(message):
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
-                                embed=discord.Embed(colour=0xff00, timestamp=message.created_at, title=f"유저정보 - {user}")
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"유저정보 - {user}")
                             else:
                                 embed=discord.Embed(colour=user.color, timestamp=message.created_at, title=f"유저정보 - {user}")
                             embed.set_thumbnail(url=user.avatar_url)
@@ -636,7 +641,7 @@ async def on_message(message):
                             embed.add_field(name="현재 유저 상태", value=f"{user_status}", inline=False)
                             await channel.send(embed=embed)
                         else:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
                                 discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
                                 discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
@@ -646,7 +651,7 @@ async def on_message(message):
                                 roles = [role for role in user.roles]
                                 embed=discord.Embed(colour=message.author.color, timestamp=message.created_at, title=f"봇정보 - {user}")
                             else:
-                                embed=discord.Embed(colour=0xff00, timestamp=message.created_at, title=f"봇정보 - {user}")
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"봇정보 - {user}")
                             embed.set_thumbnail(url=user.avatar_url)
                             embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
                             embed.add_field(name="봇 아이디", value=f"{user.id}", inline=False)
@@ -661,7 +666,7 @@ async def on_message(message):
                             embed.add_field(name="봇 초대링크 (관리자 권한)", value=f"[초대하기](https://discordapp.com/oauth2/authorize?client_id={user.id}&scope=bot&permissions=8)", inline=False)
                             await channel.send(embed=embed)
                     except:
-                        user = message.guild.get_member(int(message.content.split('<@')[1].split('>')[0]))
+                        user = message.guild.get_member(int(message.content.split('<@')[1].split('>')[0].replace("!","")))
                         if user.bot == False:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
@@ -671,7 +676,7 @@ async def on_message(message):
                             user_status = status_dict[user.status]
                             if not len(user.roles) == 1:
                                 roles = [role for role in user.roles]
-                                embed=discord.Embed(colour=0xff00, timestamp=message.created_at, title=f"유저정보 - {user}")
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"유저정보 - {user}")
                             else:
                                 embed=discord.Embed(colour=user.color, timestamp=message.created_at, title=f"유저정보 - {user}")
                             embed.set_thumbnail(url=user.avatar_url)
@@ -687,7 +692,7 @@ async def on_message(message):
                             embed.add_field(name="현재 유저 상태", value=f"{user_status}", inline=False)
                             await channel.send(embed=embed)
                         else:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
                                 discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
                                 discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
@@ -697,7 +702,7 @@ async def on_message(message):
                                 roles = [role for role in user.roles]
                                 embed=discord.Embed(colour=message.author.color, timestamp=message.created_at, title=f"봇정보 - {user}")
                             else:
-                                embed=discord.Embed(colour=0xff00, timestamp=message.created_at, title=f"봇정보 - {user}")
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"봇정보 - {user}")
                             embed.set_thumbnail(url=user.avatar_url)
                             embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
                             embed.add_field(name="봇 아이디", value=f"{user.id}", inline=False)
@@ -925,7 +930,7 @@ async def on_message(message):
     {e}
     ```"""))
                         else:
-                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT��������������������
+                            await msg.edit(embed=discord.Embed(color=0x85CFFF, title=f"eval",description=f"""📥INPUT����������������������
     ```py
     {a}
     ```
@@ -1020,12 +1025,12 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            #elif message.content == '준홍아 현재시각':
-                #now = time.localtime()
-                #embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                #embed.add_field(name="준홍봇 채팅기능", value="%02d시%02d분%02d초" % ((now.hour)+9, (now.now.min), (now.tm_sec))
-                #embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                #await channel.send(embed=embed)
+            elif message.content == '준홍아 현재시각':
+                now = time.localtime()
+                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 채팅기능", value="%02d시%02d분%02d초" % (now.tm_hour, now.tm_min, now.tm_sec), inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
 
             elif message.content == '준홍아 업타임':
                 current_time = time.time()
@@ -1056,7 +1061,7 @@ async def on_message(message):
                     await message.channel.send('계산식이 올바르지 않습니다..')
                 else:
                     mathtext = ""
-                    allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "+", "-", "*","**","x", "X", "^", "/", "(", ")"]
+                    allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "+", "-", "*","**","x", "X", "^", "/", "(", ")","%"]
                     for i in math:
                         if i in allowed:
                             mathtext += i
@@ -1110,7 +1115,11 @@ async def on_message(message):
         embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 팀 SB에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`', inline=True)
         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
         await channel.send(embed=embed)
-        await client.get_channel(int(errorchannel)).send(f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}')
+        embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+        embed.add_field(name="에러발생!", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}', inline=True)
+        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+        await client.get_channel(int(errorchannel)).send(embed=embed)
 
-access_token = os.environ["BOT_TOKEN"]
+access_token = "NTAzNTAyMTU3OTI1MDU2NTE0.W8xI7Q.9U6HgERnJKwUDpoPSY_XX9TwbjM"
+#access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)

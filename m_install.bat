@@ -1,3 +1,7 @@
+@echo off
+echo 모듈 설치를 시작합니다
+pause
+pip install wheel
 pip install asyncio
 pip install beautifulsoup4
 pip install bs4
