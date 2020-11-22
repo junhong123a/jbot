@@ -51,6 +51,11 @@ async def on_reaction_add(reaction, user):
     if str(reaction.emoji) == "📘":
         await reaction.message.channel.send(user.name + "님이 ?? 리액션을 하셨습니다.")
 
+    
+def log_info(channel, user, message): #건유님의 코드에서 뜯어옴(?)
+    Ftime = time.strftime('%Y-%m-%d %p %I:%M:%S', time.localtime(time.time()))
+    print("log info : [시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message))
+
 def korean_to_be_englished(korean_word):
     r_lst = []
     for w in list(korean_word.strip()):
@@ -70,7 +75,10 @@ def korean_to_be_englished(korean_word):
 async def on_ready():
     print('Bot Online')
     print(client.user.name)
-    print(id)  
+    print(id)
+    log_info('Local', 'Local', "로그인 승인")
+    log_info('Local', "Local", client.user.name)
+    log_info("Local", "Local", id)
     await client.get_channel(readylog).send("준홍봇 전원 on")
     dagi = 8
     messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '안녕하세요', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!', f'이 메세지는 {dagi}초마다 바뀝니다.']
@@ -78,6 +86,7 @@ async def on_ready():
        await client.change_presence(status=discord.Status.online, activity=discord.Game(name=messages[0]))
        messages.append(messages.pop(0))
        await asyncio.sleep(dagi)
+
        
 @client.event
 async def on_message(message):
@@ -95,6 +104,7 @@ async def on_message(message):
             return None
 
         if message.content.startswith('준홍아'):
+            log_info(message.channel,message.author,message.content)
             embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
             embed.add_field(name="준홍봇 로그", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}' , inline=True)
             embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -121,8 +131,8 @@ async def on_message(message):
                     embed.add_field(name="준홍봇 정지기능", value=f"긴급한 일이 일어나 봇을 중지시킵니다.사유가 팀SB에게 전달되었습니다.\n\n 사유: {a} ", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
-                    os.system("pause")
                     await client.get_channel(int(Emergency)).send(f"긴급한 일이 일어나 봇을 중지시켰습니다. 사유 : {a}")
+                    os.system("pause")
 
                     
             elif message.content  ==  '준홍아 핑':
@@ -213,7 +223,7 @@ async def on_message(message):
 
             elif message.content.startswith('준홍아 say'):
                 try:
-                    sms = message.content[8:]
+                    sms = message.content[8:1023]
                     await channel.send(sms)
                 except:
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -223,7 +233,7 @@ async def on_message(message):
 
             elif message.content.startswith('준홍아 esay'):
                 try:
-                    sms = message.content[9:]
+                    sms = message.content[9:1023]
                     embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 채팅기능", value=(sms), inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -398,7 +408,7 @@ async def on_message(message):
                 embed.set_thumbnail(url=message.guild.icon_url)
                 embed.add_field(name="서버 기본정보", value="서버의 기본 정보입니다.", inline=False)
                 embed.add_field(name="서버 이름", value=message.guild.name, inline=True)
-                #embed.add_field(name="서버 ID", value=message.guild.id, inline=True)
+                embed.add_field(name="서버 ID", value=message.guild.id, inline=True)
                 embed.add_field(name="서버 위치", value=rnrrk, inline=True)
                 embed.add_field(name="서버 주인", value=f'<@{message.guild.owner.id}>', inline=True)
                 embed.add_field(name="서버 주인 ID", value=message.guild.owner.id, inline=True)
@@ -821,7 +831,6 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-
             elif message.content.startswith("준홍아 eval"):
                 if message.author.id in owner:
                     a=message.content[9:]
@@ -1120,6 +1129,6 @@ async def on_message(message):
         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
         await client.get_channel(int(errorchannel)).send(embed=embed)
 
-access_token = "NTAzNTAyMTU3OTI1MDU2NTE0.W8xI7Q.9U6HgERnJKwUDpoPSY_XX9TwbjM"
+access_token = "NTAzNTAyMTU3OTI1MDU2NTE0.W8xI7Q._8PwbU4g7zmaY1WryZbI5vEdsqI"
 #access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
