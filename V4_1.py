@@ -1129,6 +1129,6 @@ async def on_message(message):
         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
         await client.get_channel(int(errorchannel)).send(embed=embed)
 
-access_token = "NTAzNTAyMTU3OTI1MDU2NTE0.W8xI7Q._8PwbU4g7zmaY1WryZbI5vEdsqI"
+access_token = "token"
 #access_token = os.environ["BOT_TOKEN"]
 client.run(access_token)
