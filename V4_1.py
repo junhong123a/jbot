@@ -598,9 +598,9 @@ async def on_message(message):
 
                 
             elif message.content.startswith('준홍아 정보'):
-                if str(message.content[7:]) == '':
+                if str(message.content[7:]) == '': #애반데..뭐가 넘 비효율적으로 잡음.. 
                     user = message.author
-                    date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
+                    date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                     status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
                         discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
                         discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
@@ -625,58 +625,6 @@ async def on_message(message):
                     await channel.send(embed=embed)
                 else:
                     try:
-                        
-                        if user.bot == False:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
-                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
-                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
-                            user_status = status_dict[user.status]
-                            if not len(user.roles) == 1:
-                                roles = [role for role in user.roles]
-                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"유저정보 - {user}")
-                            else:
-                                embed=discord.Embed(colour=user.color, timestamp=message.created_at, title=f"유저정보 - {user}")
-                            embed.set_thumbnail(url=user.avatar_url)
-                            embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
-                            embed.add_field(name="아이디", value=f"{user.id}", inline=False)
-                            embed.add_field(name="닉네임", value=f"{user.display_name}", inline=False)
-                            embed.add_field(name="가입일", value=f"{str(date.year)}년 {str(date.month)}월 {str(date.day)}일", inline=False)
-                            try:
-                                embed.add_field(name=f"가진 역할들({len(roles)-1}개)", value=f" ".join([role.mention for role in roles][1:]), inline=False)
-                                embed.add_field(name="가장 높은 역할", value=f"{user.top_role.mention}", inline=False)
-                            except:
-                                embed.add_field(name=f"가진 역할들", value=f"**소유한 역할이 없습니다!**", inline=False)
-                            embed.add_field(name="현재 유저 상태", value=f"{user_status}", inline=False)
-                            await channel.send(embed=embed)
-                        else:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
-                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
-                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
-                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
-                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
-                            user_status = status_dict[user.status]
-                            if not len(user.roles) == 1:
-                                roles = [role for role in user.roles]
-                                embed=discord.Embed(colour=message.author.color, timestamp=message.created_at, title=f"봇정보 - {user}")
-                            else:
-                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"봇정보 - {user}")
-                            embed.set_thumbnail(url=user.avatar_url)
-                            embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
-                            embed.add_field(name="봇 아이디", value=f"{user.id}", inline=False)
-                            embed.add_field(name="봇 닉네임", value=f"{user.display_name}", inline=False)
-                            embed.add_field(name="봇 생성일", value=f"{str(date.year)}년 {str(date.month)}월 {str(date.day)}일", inline=False)
-                            try:
-                                embed.add_field(name=f"가진 역할들({len(roles)-1}개)", value=f" ".join([role.mention for role in roles][1:]), inline=False)
-                                embed.add_field(name="가장 높은 역할", value=f"{user.top_role.mention}", inline=False)
-                            except:
-                                embed.add_field(name=f"가진 역할들", value=f"**소유한 역할이 없습니다!**", inline=False)
-                            embed.add_field(name="현재 봇 상태", value=f"{user_status}", inline=False)
-                            embed.add_field(name="봇 초대링크 (관리자 권한)", value=f"[초대하기](https://discordapp.com/oauth2/authorize?client_id={user.id}&scope=bot&permissions=8)", inline=False)
-                            await channel.send(embed=embed)
-                    except:
-                        user = message.guild.get_member(int(message.content.split('<@')[1].split('>')[0].replace("!","")))
                         if user.bot == False:
                             date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
@@ -702,7 +650,63 @@ async def on_message(message):
                             embed.add_field(name="현재 유저 상태", value=f"{user_status}", inline=False)
                             await channel.send(embed=embed)
                         else:
-                            date = datetime.datetime.utcfromtimestamp(((int(user.id.replace("!","")) >> 22) + 1420070400000) / 1000)
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
+                            user_status = status_dict[user.status]
+                            if not len(user.roles) == 1:
+                                roles = [role for role in user.roles]
+                                embed=discord.Embed(colour=message.author.color, timestamp=message.created_at, title=f"봇정보 - {user}")
+                            else:
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"봇정보 - {user}")
+                            embed.set_thumbnail(url=user.avatar_url)
+                            embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
+                            embed.add_field(name="봇 아이디", value=f"{user.id}", inline=False)
+                            embed.add_field(name="봇 닉네임", value=f"{user.display_name}", inline=False)
+                            embed.add_field(name="봇 생성일", value=f"{str(date.year)}년 {str(date.month)}월 {str(date.day)}일", inline=False)
+                            try:
+                                embed.add_field(name=f"가진 역할들({len(roles)-1}개)", value=f" ".join([role.mention for role in roles][1:]), inline=False)
+                                embed.add_field(name="가장 높은 역할", value=f"{user.top_role.mention}", inline=False)
+                            except:
+                                embed.add_field(name=f"가진 역할들", value=f"**소유한 역할이 없습니다!**", inline=False)
+                            embed.add_field(name="현재 봇 상태", value=f"{user_status}", inline=False)
+                            embed.add_field(name="봇 초대링크 (관리자 권한)", value=f"[초대하기](https://discordapp.com/oauth2/authorize?client_id={user.id}&scope=bot&permissions=8)", inline=False)
+                            await channel.send(embed=embed)
+                    except:
+                        try:
+                            user = message.guild.get_member(int(message.content.split()[2].replace('<@','').replace('>','').replace("!","")))
+                        except ValueError:
+                            embed = discord.Embed(title="경고",description="옳바른 값을 입력해주세요",colour=0x85CFFF)
+                            await channel.send(embed=embed)
+                            return
+                        if user.bot == False:
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
+                            status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
+                                discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
+                                discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
+                                discord.Status.do_not_disturb: "<:status_dnd:728527943684456459> 방해금지"}
+                            user_status = status_dict[user.status]
+                            if not len(user.roles) == 1:
+                                roles = [role for role in user.roles]
+                                embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f"유저정보 - {user}")
+                            else:
+                                embed=discord.Embed(colour=user.color, timestamp=message.created_at, title=f"유저정보 - {user}")
+                            embed.set_thumbnail(url=user.avatar_url)
+                            embed.set_footer(text=f"{message.author}", icon_url=message.author.avatar_url)
+                            embed.add_field(name="아이디", value=f"{user.id}", inline=False)
+                            embed.add_field(name="닉네임", value=f"{user.display_name}", inline=False)
+                            embed.add_field(name="가입일", value=f"{str(date.year)}년 {str(date.month)}월 {str(date.day)}일", inline=False)
+                            try:
+                                embed.add_field(name=f"가진 역할들({len(roles)-1}개)", value=f" ".join([role.mention for role in roles][1:]), inline=False)
+                                embed.add_field(name="가장 높은 역할", value=f"{user.top_role.mention}", inline=False)
+                            except:
+                                embed.add_field(name=f"가진 역할들", value=f"**소유한 역할이 없습니다!**", inline=False)
+                            embed.add_field(name="현재 유저 상태", value=f"{user_status}", inline=False)
+                            await channel.send(embed=embed)
+                        else:
+                            date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                             status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
                                 discord.Status.offline: '<:status_offline:728527943831126036> 오프라인',
                                 discord.Status.idle: "<:status_idle:728527943806091364> 자리비움",
