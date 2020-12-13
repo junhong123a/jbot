@@ -26,6 +26,7 @@ botjoinchannel = 704252617680748618
 readylog = 762180021422391336
 botleavelog = 704252617680748618
 gunlog = 762179801712558080
+sulog = 762179801712558080
 Emergency = 762179874772484106
 id = 503502157925056514
 ban = []
@@ -110,6 +111,9 @@ async def on_message(message):
             embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
             await client.get_channel(int(logchannel)).send(embed=embed)
 
+            if message.is_private and message.author != "503502157925056514":
+                await client.send_message(discord.utils.get(client.get_all_members(), id='447934468603379724'), message.author.name + "`" + message.author.id + "`" + ":" + "(" + message.content + ")")
+
             if message.content == "준홍아 안녕":
                 embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 await message.channel.send(f"<@{message.author.id}> 님 환영합니다!")
@@ -134,6 +138,9 @@ async def on_message(message):
                     await client.get_channel(int(Emergency)).send(f"긴급한 일이 일어나 봇을 중지시켰습니다. 사유 : {a}")
                     os.system("pause")
 
+            elif message.content.startswith("준홍아 문의답변"):
+                member = discord.utils.get(client.get_all_members(), id=message.content[8:27])
+                await client.send_message(member, "준홍봇 문의답변: " + message.content[28:])
                     
             elif message.content  ==  '준홍아 핑':
                 vld = client.latency * 1000
@@ -437,7 +444,7 @@ async def on_message(message):
                         await channel.send("사용방법: 준홍아 건의 할말")
                     else:
                         await channel.send("건의가 완료되었습니다!")
-                        await client.get_channel(int(gunlog)).send(f'<@447934468603379724>')
+                        await client.get_channel(int(gunlog)).send(f'<@447934468603379724>') 
                         embed=discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                         embed.add_field(name="준홍봇 건의", value=f'{message.author}({message.author.id})님의 건의 : {msg}', inline=True)
                         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -578,7 +585,7 @@ async def on_message(message):
                     await asyncio.sleep(3)
                     await msg.delete()
                 else:
-                    await channel.send("뭐하시는거죠")
+                    await channel.send("당신은 권한이 없습니다")
 
             
 
@@ -598,7 +605,7 @@ async def on_message(message):
 
                 
             elif message.content.startswith('준홍아 정보'):
-                if str(message.content[7:]) == '': #애반데..뭐가 넘 비효율적으로 잡음.. 
+                if str(message.content[7:]) == '': #애반데..뭐가 넘 비효율적으로 잡음.. 이 주석 뭔데 지워버릴까 
                     user = message.author
                     date = datetime.datetime.utcfromtimestamp(((int(user.id) >> 22) + 1420070400000) / 1000)
                     status_dict: dict = {discord.Status.online: '<:status_online:728527943827062804> 온라인',
