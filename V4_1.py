@@ -41,6 +41,13 @@ def log_info(channel, user, message):  # 건유님의 코드에서 뜯어옴(?)
     Ftime = time.strftime('%Y-%m-%d %p %I:%M:%S', time.localtime(time.time()))
     print("log info : [시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message))
 
+async def get_text_from_url(url):
+    async with aiohttp.ClientSession() as sess:
+        async with sess.get(url, headers={'user-agent': 'Mozilla/5.0'}) as res:
+            text = await res.text()
+    text = BeautifulSoup(text, 'html.parser').text
+
+
 @client.event
 async def on_ready():
     log_info('Local', 'Local', "로그인 승인")
@@ -78,6 +85,12 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
+            elif message.content == "준홍아":
+                embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 안녕을 입력해보세요~", inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
+
             elif message.content.startswith("준홍아 긴급"):
                 if message.author.id in owner:
                     a = message.content[7:]
@@ -97,7 +110,7 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     print(f'ping is {round(vld)}ms')
 
-                elif vld >= 200 and vld <= 230:
+                elif  vld >= 200 and vld <= 230:
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                     embed.add_field(name="준홍봇 핑 체크", value=f'준홍봇의 핑은\n{round(vld)}ms, 상태: 약간 느림 입니다!', inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -195,8 +208,7 @@ async def on_message(message):
                     await channel.send(embed=embed)
                 except:
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 갠챗 유저ID 할말 (문제가 없는데 이메세지가 출력된다면 권한문제일수 있습니다.)",
-                                    inline=True)
+                    embed.add_field(name="준홍봇 채팅기능", value="사용방법: 준홍아 갠챗 유저ID 할말 (문제가 없는데 이메세지가 출력된다면 권한문제일수 있습니다.)", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
@@ -211,7 +223,6 @@ async def on_message(message):
                 await msg.add_reaction('👎')
 
             elif message.content == '준홍아 멜론차트':
-                if __name__ == "__main__":
                     RANK = 10
                     header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
                     req = requests.get('https://www.melon.com/chart/index.htm', headers=header)
@@ -219,6 +230,7 @@ async def on_message(message):
                     parse = BeautifulSoup(html, 'html.parser')
                     titles = parse.find_all("div", {"class": "ellipsis rank01"})
                     songs = parse.find_all("div", {"class": "ellipsis rank02"})
+                    titles = get_text_from_url("ttps://www.melon.com/chart/index.htm")
                     title = []
                     song = []
                     embed = discord.Embed(
@@ -335,8 +347,7 @@ async def on_message(message):
             elif message.content == '준홍아 섭정보' or message.content == "준홍아 서버정보":
                 rnrrk = message.guild.region
                 print(message.guild.region)
-                embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at,
-                                      title=f"서버 정보 - {message.guild.name}")
+                embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at,title=f"서버 정보 - {message.guild.name}")
                 embed.set_thumbnail(url=message.guild.icon_url)
                 embed.add_field(name="서버 기본정보", value="서버의 기본 정보입니다.", inline=False)
                 embed.add_field(name="서버 이름", value=message.guild.name, inline=True)
@@ -672,7 +683,7 @@ async def on_message(message):
                     await channel.send("완료")
                 else:
                     await channel.send("NO 권한")
-                    return None
+                    return
 
             elif message.content.startswith("준홍아 eval"):
                 if message.author.id in owner:
