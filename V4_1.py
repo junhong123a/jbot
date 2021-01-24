@@ -1,13 +1,8 @@
-from pymongo import MongoClient
-import aiohttp, discord, asyncio, pymongo, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, json, requests, ctx, sys, platform, psutil, math, io, calendar, hgtk, psycopg2
-from PIL import Image
+import aiohttp, discord, asyncio, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, requests, sys, platform, psutil, math, io, calendar, hgtk
 from itertools import cycle
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
-from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
 from shutil import copyfile
-from json import loads
 from captcha.image import ImageCaptcha
 
 # 초성 리스트. 00 ~ 18
