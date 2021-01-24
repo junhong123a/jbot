@@ -1,8 +1,6 @@
-import aiohttp, discord, asyncio, random, threading, time, ast, bs4, openpyxl, re, os, urllib, datetime, requests, sys, platform, psutil, math, io, calendar, hgtk
-from itertools import cycle
+import aiohttp, discord, asyncio, random, threading, time, bs4, openpyxl, os, urllib, datetime, requests, sys, platform, psutil, math, hgtk
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
-from shutil import copyfile
 from captcha.image import ImageCaptcha
 
 # 초성 리스트. 00 ~ 18
@@ -156,7 +154,7 @@ async def on_message(message):
                     time.sleep(3)
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title="준홍봇 도움말", description="모든 명령어 앞엔 `준홍아` 라는 접두사가 붙습니다.")
                     embed.add_field(name="기본명령어1", value="안녕, 핑, 도움, 멜론차트, 내정보, 내프사, 실검, 섭정보(서버정보), 타자, 주사위, 규카트, 짜장면, 냉면, 타자", inline=True)
-                    embed.add_field(name="기본명령어2", value="개발코드, 닉네임, 탕수육, 감자칩, 뭐해, 캡챠, 현재시각, 업타임, 봇켜짐, 에교해봐", inline=True)
+                    embed.add_field(name="기본명령어2", value="개발코드, 닉네임, 탕수육, 감자칩, 뭐해, 현재시각, 업타임, 봇켜짐, 에교해봐", inline=True)
                     embed.add_field(name="서식필요명령어", value="say, esay, 갠챗, 찬반투표, 익명, 날씨, 건의, 정보, 계산, 단어학습", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await message.author.send(embed=embed)
@@ -769,32 +767,6 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     await client.close()
                     os.system("py V4_1.py")
-
-            elif message.content.startswith('준홍아 캡챠'):
-                Image_captcha = ImageCaptcha()
-                msg = ""
-                a = ""
-                for i in range(6):
-                    a += str(random.randint(0, 9))
-
-                name = str(message.author.id) + ".png"
-                Image_captcha.write(a, name)
-
-                await channel.send(file=discord.File(name))
-
-                def check(msg):
-                    return msg.author == message.author and msg.channel == message.channel
-
-                try:
-                    msg = await client.wait_for("message", timeout=10, check=check)
-                except:
-                    await message.channel.send("시간초과입니다.")
-                    return
-
-                if msg.content == a:
-                    await message.channel.send("정답입니다!")
-                else:
-                    await message.channel.send("오답입니다.")
 
             elif message.content == '준홍아 현재시각':
                 now = time.localtime()
