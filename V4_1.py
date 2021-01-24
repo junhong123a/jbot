@@ -1,4 +1,4 @@
-import aiohttp, discord, asyncio, random, threading, time, bs4, openpyxl, os, urllib, datetime, requests, sys, platform, psutil, math, hgtk
+import aiohttp, discord, asyncio, random, threading, time, bs4, os, urllib, datetime, requests, sys, platform, psutil, math, hgtk
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 from captcha.image import ImageCaptcha
