@@ -37,9 +37,12 @@ intents.members = True
 
 client = discord.Client(intents=intents)
 
-def log_info(channel, user, message):  # 건유님의 코드에서 뜯어옴(?)
+def log_info(channel, user, message):
     Ftime = time.strftime('%Y-%m-%d %p %I:%M:%S', time.localtime(time.time()))
-    print("log info : [시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message))
+    print("[시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message))
+    log = open("log.txt","a")
+    log.write("[시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message) + "\n")
+    log.close()
 
 async def get_text_from_url(url):
     async with aiohttp.ClientSession() as sess:
@@ -91,7 +94,6 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
-            elif message.content.startswith("준홍아 긴급"):
                 if message.author.id in owner:
                     a = message.content[7:]
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
@@ -141,6 +143,12 @@ async def on_message(message):
             elif message.content == '준홍아 수현':
                 embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
                 embed.add_field(name="준홍봇 채팅기능", value="수현은 저랑 같이 봇 개발하는 개발자 입니다", inline=True)
+                embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+                await channel.send(embed=embed)
+
+            elif message.content == "준홍아 하위":
+                embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+                embed.add_field(name="준홍봇 채팅기능", value="안녕하신가, 용사여", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
