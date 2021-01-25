@@ -85,6 +85,7 @@ async def on_message(message):
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
+            elif message.content.startswith("준홍아 긴급"):
                 if message.author.id in owner:
                     a = message.content[7:]
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
