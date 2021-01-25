@@ -81,7 +81,7 @@ async def on_message(message):
 
             elif message.content == "준홍아":
                 embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 안녕을 입력해보세요~", inline=True)
+                embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 안녕을 입력해보세요~^^7", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
