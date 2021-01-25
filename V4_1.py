@@ -1,7 +1,5 @@
-import aiohttp, discord, asyncio, random, threading, time, bs4, os, urllib, datetime, requests, sys, platform, psutil, math, hgtk
-from urllib.request import urlopen, Request
+import aiohttp, discord, asyncio, random, time, os, datetime, requests, math, hgtk
 from bs4 import BeautifulSoup
-from captcha.image import ImageCaptcha
 
 # 초성 리스트. 00 ~ 18
 CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
