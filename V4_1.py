@@ -1,4 +1,4 @@
-import aiohttp, discord, asyncio, random, time, os, datetime, requests, math, hgtk
+import aiohttp, discord, asyncio, random, time, os, datetime, math, hgtk, lxml
 from bs4 import BeautifulSoup
 
 # 초성 리스트. 00 ~ 18
@@ -50,7 +50,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    try:
+    #try:
         channel = message.channel
         if message.author.bot:
             return
@@ -75,16 +75,6 @@ async def on_message(message):
                 embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 안녕을 입력해보세요~^^7", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
-
-            elif message.content.startswith("준홍아 긴급"):
-                if message.author.id in owner:
-                    a = message.content[7:]
-                    embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="준홍봇 정지기능", value=f"긴급한 일이 일어나 봇을 중지시킵니다.사유가 팀SB에게 전달되었습니다.\n\n 사유: {a} ", inline=True)
-                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                    await channel.send(embed=embed)
-                    await client.get_channel(int(Emergency)).send(f"긴급한 일이 일어나 봇을 중지시켰습니다. 사유 : {a}")
-                    os.system("pause")
 
             elif message.content == '준홍아 핑':
                 vld = client.latency * 1000
@@ -143,7 +133,7 @@ async def on_message(message):
                     await channel.send(embed=embed)
                     time.sleep(3)
                     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title="준홍봇 도움말", description="모든 명령어 앞엔 `준홍아` 라는 접두사가 붙습니다.")
-                    embed.add_field(name="기본명령어1", value="안녕, 핑, 도움, 멜론차트, 내정보, 내프사, 실검, 섭정보(서버정보), 타자, 주사위, 규카트, 짜장면, 냉면, 타자", inline=True)
+                    embed.add_field(name="기본명령어1", value="안녕, 핑, 도움, 멜론차트, 내정보, 내프사, 섭정보(서버정보), 타자, 주사위, 규카트, 짜장면, 냉면, 타자", inline=True)
                     embed.add_field(name="기본명령어2", value="개발코드, 닉네임, 탕수육, 감자칩, 뭐해, 현재시각, 업타임, 봇켜짐, 에교해봐", inline=True)
                     embed.add_field(name="서식필요명령어", value="say, esay, 갠챗, 찬반투표, 익명, 날씨, 건의, 정보, 계산, 단어학습", inline=True)
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
@@ -216,25 +206,26 @@ async def on_message(message):
             elif message.content == '준홍아 멜론차트':
                     RANK = 10
                     header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'}
-                    req = requests.get('https://www.melon.com/chart/index.htm', headers=header)
-                    html = req.text
-                    parse = BeautifulSoup(html, 'html.parser')
-                    titles = parse.find_all("div", {"class": "ellipsis rank01"})
-                    songs = parse.find_all("div", {"class": "ellipsis rank02"})
-                    title = []
-                    song = []
-                    embed = discord.Embed(
-                        title="멜론차트 상위권(1~10위)\n차트 출처 : kakao(melon)\n",
-                        colour=0x85CFFF, timestamp=message.created_at
-                    )
-                    for t in titles:
-                        title.append(t.find('a').text)
-                    for s in songs:
-                        song.append(s.find('span', {"class": "checkEllipsis"}).text)
-                    for i in range(RANK):
-                        embed.add_field(name='%3d위' % (i + 1), value='%s - %s' % (title[i], song[i]), inline=False)
-                    embed.set_footer(text=f'{message.author}, 인증됨', icon_url=message.author.avatar_url)
-                    await channel.send(f'<@{message.author.id}>', embed=embed)
+                    async with aiohttp.ClientSession() as session:
+                        async with session.request("GET", "https://www.melon.com/chart/index.htm", headers=header) as req:
+                            html = await req.text()
+                            parse = BeautifulSoup(html, 'lxml')
+                            titles = parse.find_all("div", {"class": "ellipsis rank01"})
+                            songs = parse.find_all("div", {"class": "ellipsis rank02"})
+                            title = []
+                            song = []
+                            embed = discord.Embed(
+                                title="멜론차트 상위권(1~10위)\n차트 출처 : kakao(melon)\n",
+                                colour=0x85CFFF, timestamp=message.created_at
+                            )
+                            for t in titles:
+                                title.append(t.find('a').text)
+                            for s in songs:
+                                song.append(s.find('span', {"class": "checkEllipsis"}).text)
+                            for i in range(RANK):
+                                embed.add_field(name='%3d위' % (i + 1), value='%s - %s' % (title[i], song[i]), inline=False)
+                            embed.set_footer(text=f'{message.author}, 인증됨', icon_url=message.author.avatar_url)
+                            await channel.send(f'<@{message.author.id}>', embed=embed)
 
             elif message.content.startswith('준홍아 익명'):
                 try:
@@ -292,47 +283,39 @@ async def on_message(message):
                 NowTemp = ""
                 Finallocation = location + '날씨'
                 CheckDust = []
+                hdr = {'User-Agent': ('mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/78.0.3904.70 safari/537.36')}
 
-                url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=' + Finallocation
-                hdr = {'User-Agent': (
-                    'mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/78.0.3904.70 safari/537.36')}
-                req = requests.get(url, headers=hdr)
-                html = req.text
-                soup = BeautifulSoup(html, 'html.parser')
+                async with aiohttp.ClientSession() as session:
+                    async with session.request("GET",'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=' + Finallocation, headers=hdr) as req:
+                        html = await req.text()
+                        soup = BeautifulSoup(html, 'lxml')
 
-                NowTemp = soup.find('span', {'class': 'todaytemp'}).text + soup.find('span',{'class': 'tempmark'}).text[2:]
-                WeatherCast = soup.find('p', {'class': 'cast_txt'}).text
-                TodayMorningTemp = soup.find('span', {'class': 'min'}).text
-                TodayAfternoonTemp = soup.find('span', {'class': 'max'}).text
-                TodayFeelTemp = soup.find('span', {'class': 'sensible'}).text[5:]
-                TodayUV = soup.find('span', {'class': 'indicator'}).text[4:-2] + " " + soup.find('span', {'class': 'indicator'}).text[-2:]
-                CheckDust1 = soup.find('div', {'class': 'sub_info'})
-                CheckDust2 = CheckDust1.find('div', {'class': 'detail_box'})
-                for i in CheckDust2.select('dd'):
-                    CheckDust.append(i.text)
-                FineDust = CheckDust[0][:-2] + " " + CheckDust[0][-2:]
-                UltraFineDust = CheckDust[1][:-2] + " " + CheckDust[1][-2:]
-                Ozon = CheckDust[2][:-2] + " " + CheckDust[2][-2:]
+                        NowTemp = soup.find('span', {'class': 'todaytemp'}).text + soup.find('span',{'class': 'tempmark'}).text[2:]
+                        WeatherCast = soup.find('p', {'class': 'cast_txt'}).text
+                        TodayMorningTemp = soup.find('span', {'class': 'min'}).text
+                        TodayAfternoonTemp = soup.find('span', {'class': 'max'}).text
+                        TodayFeelTemp = soup.find('span', {'class': 'sensible'}).text[5:]
+                        TodayUV = soup.find('span', {'class': 'indicator'}).text[4:-2] + " " + soup.find('span', {'class': 'indicator'}).text[-2:]
+                        CheckDust1 = soup.find('div', {'class': 'sub_info'})
+                        CheckDust2 = CheckDust1.find('div', {'class': 'detail_box'})
+                        for i in CheckDust2.select('dd'):
+                            CheckDust.append(i.text)
+                        FineDust = CheckDust[0][:-2] + " " + CheckDust[0][-2:]
+                        UltraFineDust = CheckDust[1][:-2] + " " + CheckDust[1][-2:]
+                        Ozon = CheckDust[2][:-2] + " " + CheckDust[2][-2:]
 
-                embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f'{location} 날씨')
-                embed.add_field(name="=========================", value=f"{Finallocation} 정보입니다", inline=True)
-                embed.add_field(name="현재온도", value=f'{NowTemp}', inline=True)
-                embed.add_field(name="체감온도", value=f'{TodayFeelTemp}', inline=True)
-                embed.add_field(name="오전/오후 온도", value=f'{TodayMorningTemp} / {TodayAfternoonTemp}', inline=True)
-                embed.add_field(name="현재날씨정보", value=f'{WeatherCast}', inline=True)
-                embed.add_field(name="현재 자외선 지수", value=f'{TodayUV}', inline=True)
-                embed.add_field(name="현재 미세먼지 농도", value=f'{FineDust}', inline=True)
-                embed.add_field(name="현재 초미세먼지 농도", value=f'{UltraFineDust}', inline=True)
-                embed.add_field(name="현재 오존 지수", value=f'{Ozon}', inline=True)
-                embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
-                await channel.send(embed=embed)
-
-            elif message.content == "준홍아 실검":
-                embed = discord.Embed(title=f"네이버 실시간 검색 정보", colour=0x85CFFF, timestamp=datetime.datetime.utcnow())
-                for r in requests.get('https://www.naver.com/srchrank?frm=main').json().get("data")[:10]:
-                    embed.add_field(name=f"**{r.get('rank')}위**",value=f"[{r.get('keyword')}](https://search.naver.com/search.naver?where=nexearch&query={r.get('keyword').replace(' ', '+')})",inline=False)
-                embed.set_footer(text=f"{message.author}, 인증됨, 도움 : OWO#1996", icon_url=message.author.avatar_url)
-                await channel.send(embed=embed)
+                        embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at, title=f'{location} 날씨')
+                        embed.add_field(name="=========================", value=f"{Finallocation} 정보입니다", inline=True)
+                        embed.add_field(name="현재온도", value=f'{NowTemp}', inline=True)
+                        embed.add_field(name="체감온도", value=f'{TodayFeelTemp}', inline=True)
+                        embed.add_field(name="오전/오후 온도", value=f'{TodayMorningTemp} / {TodayAfternoonTemp}', inline=True)
+                        embed.add_field(name="현재날씨정보", value=f'{WeatherCast}', inline=True)
+                        embed.add_field(name="현재 자외선 지수", value=f'{TodayUV}', inline=True)
+                        embed.add_field(name="현재 미세먼지 농도", value=f'{FineDust}', inline=True)
+                        embed.add_field(name="현재 초미세먼지 농도", value=f'{UltraFineDust}', inline=True)
+                        embed.add_field(name="현재 오존 지수", value=f'{Ozon}', inline=True)
+                        embed.set_footer(text=f"{message.author}, 인증됨 ", icon_url=message.author.avatar_url)
+                        await channel.send(embed=embed)
 
             elif message.content == '준홍아 섭정보' or message.content == "준홍아 서버정보":
                 rnrrk = message.guild.region
@@ -839,15 +822,15 @@ async def on_message(message):
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-    except Exception as ex:
-        embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-        embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 준홍 관리자에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
-        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-        await channel.send(embed=embed)
-        embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-        embed.add_field(name="에러발생!", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}',inline=True)
-        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-        await client.get_channel(int(errorchannel)).send(embed=embed)
+    # except Exception as ex:
+    #     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+    #     embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 준홍 관리자에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
+    #     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+    #     await channel.send(embed=embed)
+    #     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+    #     embed.add_field(name="에러발생!", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}',inline=True)
+    #     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+    #     await client.get_channel(int(errorchannel)).send(embed=embed)
 
 access_token = "token"
 #access_token = os.environ["BOT_TOKEN"]
