@@ -8,15 +8,15 @@ JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 
 # 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
-logchannel = 762179726927986718
-errorchannel = 762179910004506634
+logchannel = 704252617680748618
+errorchannel = 704252617680748618
 owner = [447934468603379724]
 botjoinchannel = 704252617680748618
-readylog = 762180021422391336
+readylog = 704252617680748618
 botleavelog = 704252617680748618
-gunlog = 762179801712558080
-sulog = 762179801712558080
-Emergency = 762179874772484106
+gunlog = 704252617680748618
+sulog = 704252617680748618
+Emergency = 704252617680748618
 id = 503502157925056514
 ban = []
 
@@ -31,16 +31,9 @@ client = discord.Client(intents=intents)
 def log_info(channel, user, message):
     Ftime = time.strftime('%Y-%m-%d %p %I:%M:%S', time.localtime(time.time()))
     print("[시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message))
-    log = open("log.txt","a")
-    log.write("[시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message) + "\n")
-    log.close()
-
-async def get_text_from_url(url):
-    async with aiohttp.ClientSession() as sess:
-        async with sess.get(url, headers={'user-agent': 'Mozilla/5.0'}) as res:
-            text = await res.text()
-    text = BeautifulSoup(text, 'html.parser').text
-
+    # log = open("log. txt","a")
+    # log.write("[시간: " + str(Ftime) + ",채널: " + str(channel) + ",유저: " + str(user) + "]: " + str(message) + "\n")
+    # log.close()
 
 @client.event
 async def on_ready():
@@ -54,8 +47,6 @@ async def on_ready():
         await client.change_presence(status=discord.Status.online, activity=discord.Game(name=messages[0]))
         messages.append(messages.pop(0))
         await asyncio.sleep(dagi)
-
-
 
 @client.event
 async def on_message(message):
@@ -230,7 +221,6 @@ async def on_message(message):
                     parse = BeautifulSoup(html, 'html.parser')
                     titles = parse.find_all("div", {"class": "ellipsis rank01"})
                     songs = parse.find_all("div", {"class": "ellipsis rank02"})
-                    titles = get_text_from_url("ttps://www.melon.com/chart/index.htm")
                     title = []
                     song = []
                     embed = discord.Embed(
@@ -358,7 +348,7 @@ async def on_message(message):
                 embed.add_field(name="서버 채널 수",value=f'전체 채널: {len(message.guild.channels)}개 (채팅채널 : {len(message.guild.text_channels)}개 | 음성채널 : {len(message.guild.voice_channels)}개 | 카테고리 : {len(message.guild.categories)}개)',inline=True)
                 embed.add_field(name="서버 유저정보", value="서버의 유저 정보입니다.", inline=False)
                 embed.add_field(name="서버 멤버 수",value=f'{len(message.guild.members)}명 (봇 : {len(list(filter(lambda x: x.bot, message.guild.members)))}명 | 유저 : {len(list(filter(lambda x: not x.bot, message.guild.members)))}명)',inline=True)
-                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)
+                embed.add_field(name="서버 부스트정보", value="서버의 부스트 정보입니다.", inline=False)  
                 embed.add_field(name="서버 부스트 레벨", value=f'<:boost:707784277307293747> {message.guild.premium_tier}레벨',inline=True)
                 embed.add_field(name="서버 부스트 횟수", value=f'<:boost:707784277307293747> {message.guild.premium_subscription_count}번', inline=True)
                 embed.add_field(name="서버 잠수채널/시스템채널 정보", value="서버의 잠수채널/시스템채널 정보입니다.", inline=False)
@@ -459,19 +449,19 @@ async def on_message(message):
 
 
 
-            elif message.content.startswith("준홍아 cmd"):
-                if message.author.id in owner:
-                    try:
-                        a = message.content[8:]
-                    except:
-                        await message.channel.send("내용을 입력해주세요!")
-                        return
-                    proc = await asyncio.create_subprocess_shell(a, stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
-                    dd, _ = await proc.communicate()
-                    embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                    embed.add_field(name="cmd", value=f"{dd.decode('cp949')}", inline=True)
-                    embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-                    await channel.send(embed=embed)
+            # elif message.content.startswith("준홍아 cmd"):
+            #     if message.author.id in owner:
+            #         try:
+            #             a = message.content[8:]
+            #         except:
+            #             await message.channel.send("내용을 입력해주세요!")
+            #             return
+            #         proc = await asyncio.create_subprocess_shell(a, stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
+            #         dd, _ = await proc.communicate()
+            #         embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+            #         embed.add_field(name="cmd", value=f"{dd.decode('cp949')}", inline=True)
+            #         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+            #         await channel.send(embed=embed)
 
 
             elif message.content.startswith('준홍아 정보'):
@@ -851,7 +841,7 @@ async def on_message(message):
 
     except Exception as ex:
         embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-        embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 팀 SB에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
+        embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 준홍 관리자에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
         embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
         await channel.send(embed=embed)
         embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
