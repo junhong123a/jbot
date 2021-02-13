@@ -41,16 +41,10 @@ async def on_ready():
     log_info('Local', "Local", client.user.name)
     log_info("Local", "Local", id)
     await client.get_channel(readylog).send("준홍봇 전원 on")
-    dagi = 8
-    messages = ['준홍아 도움을 입력해 명령어 확인', f'{len(client.guilds)}개의 서버에 참여중', f'{len(client.users)}명의 유저들과 소통하는중', '안녕하세요', '문의는 junhong123a@naver.com 또는 준홍!good good#8922', '개인메세지는 `준홍아 갠챗`', '사용자 여러분 감사합니다!',f'이 메세지는 {dagi}초마다 바뀝니다.']
-    while True:
-        await client.change_presence(status=discord.Status.online, activity=discord.Game(name=messages[0]))
-        messages.append(messages.pop(0))
-        await asyncio.sleep(dagi)
 
 @client.event
 async def on_message(message):
-    #try:
+    try:
         channel = message.channel
         if message.author.bot:
             return
@@ -72,7 +66,7 @@ async def on_message(message):
 
             elif message.content == "준홍아":
                 embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-                embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 안녕을 입력해보세요~^^7", inline=True)
+                embed.add_field(name="준홍봇 인사기능", value="안녕하세요! 준홍아 도움을 입력해보세요~^^7", inline=True)
                 embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
 
@@ -822,16 +816,44 @@ async def on_message(message):
                     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
                     await channel.send(embed=embed)
 
-    # except Exception as ex:
-    #     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-    #     embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 준홍 관리자에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
-    #     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-    #     await channel.send(embed=embed)
-    #     embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
-    #     embed.add_field(name="에러발생!", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}',inline=True)
-    #     embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
-    #     await client.get_channel(int(errorchannel)).send(embed=embed)
+    except Exception as ex:
+        embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+        embed.add_field(name=":no_entry_sign: 오류!! ERROR!! :no_entry_sign:", value=f'에러 준홍봇에서 발생해요!\n에러에 대한 내용이 준홍 관리자에게 전송되었습니다!\n에러 내용 : {str(ex)} 사용방법이 궁금하시다면 `준홍아 도움`',inline=True)
+        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+        await channel.send(embed=embed)
+        embed = discord.Embed(colour=0x85CFFF, timestamp=message.created_at)
+        embed.add_field(name="에러발생!", value=f'guild : {message.channel.guild}({message.guild.id})\nch = {message.channel.name}({message.channel.id})\nauthor = {message.author}({message.author.id})\ncontent = {message.content}\nerror = {str(ex)}',inline=True)
+        embed.set_footer(text=f"{message.author}, 인증됨", icon_url=message.author.avatar_url)
+        await client.get_channel(int(errorchannel)).send(embed=embed)
 
-access_token = "token"
-#access_token = os.environ["BOT_TOKEN"]
+async def my_background_task():
+    await client.wait_until_ready()
+    while not client.is_closed():
+        game = discord.Game("준홍아 도움을 입력해 명령어 확인")
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game(f'{len(client.guilds)}개의 서버에 참여중')
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game(f'{len(client.users)}명의 유저들과 소통하는중')
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game("안녕하세요")
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game("문의는 junhong123a@naver.com 또는 준홍!good good#8922")
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game("개인메세지는 `준홍아 갠챗`")
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game("사용자 여러분 감사합니다!")
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+        game = discord.Game('이 메세지는 10초마다 바뀝니다.')
+        await client.change_presence(status=discord.Status.online, activity=game)
+        await asyncio.sleep(10)
+client.loop.create_task(my_background_task())
+
+access_token = "
 client.run(access_token)
